@@ -46,30 +46,6 @@
 
   <style>
     :root {
-      --carlos-navy: #0F1E3A;
-      --steel-blue: #3E5C80;
-      --olive-green: #8A8F3D;
-      --cool-gray: #E6E8EB;
-      --warm-white: #F8F8F5;
-      --charcoal: #1A1A1A;
-      --ease-carlos: cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 88px;
-    }
-
-    body {
-      font-family: "Noto Sans TC", Inter, system-ui, sans-serif;
-      color: var(--charcoal);
-      background: #fff;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    ::selection {
-      background: rgba(138, 143, 61, 0.22);
       color: var(--carlos-navy);
     }
 
@@ -317,6 +293,18 @@
     .signature-card .action-arrow {
       display: inline-block;
       transition: transform .36s var(--ease-carlos);
+    }
+
+    .cover-frame {
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: #fff;
+    }
+
+    .cover-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     @media (hover: hover) {
@@ -707,6 +695,11 @@
             <p class="mt-1 text-sm text-charcoal/65">實戰型管理教練</p>
           </div>
 
+          <figure class="mt-8 max-w-[220px]">
+            <img src="mywork/LOGO.png" alt="卡洛斯實戰管理顧問品牌 LOGO" class="w-full rounded-xl border border-cool-gray bg-white object-contain p-3 shadow-soft" loading="lazy" />
+            <figcaption class="mt-3 font-inter text-[10px] font-semibold uppercase tracking-[0.16em] text-steel-blue">Carlos Management Practice</figcaption>
+          </figure>
+
           <dl class="mt-10 grid grid-cols-1 gap-6 border-y border-cool-gray py-7 sm:grid-cols-3 lg:grid-cols-1">
             <div>
               <dt class="font-inter text-[10px] font-semibold uppercase tracking-[0.16em] text-steel-blue">經驗</dt>
@@ -888,6 +881,39 @@
         </div>
 
         <p id="article-demo-message" class="sr-only" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- Practice Article Covers -->
+    <section id="article-covers" class="section-pad scroll-mt-24 bg-warm-white" aria-labelledby="article-covers-title">
+      <div class="editorial-container">
+        <div class="reveal grid gap-8 lg:grid-cols-12">
+          <div class="lg:col-span-4">
+            <p class="eyebrow">實戰管理解析</p>
+            <p class="mt-4 max-w-xs text-sm leading-7 text-steel-blue">把管理現場拆開來看，從每一篇解析找到可以帶回工作的判斷線索。</p>
+          </div>
+          <div class="lg:col-span-8">
+            <h2 id="article-covers-title" class="display-title">每一篇文章，都是一次現場練習。</h2>
+            <p class="mt-6 max-w-2xl body-copy text-charcoal/68">收錄實戰管理解析文章封面，持續整理新手主管在角色、溝通與團隊帶領中會遇到的真實問題。</p>
+          </div>
+        </div>
+
+        <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <figure class="cover-card reveal overflow-hidden rounded-xl border border-cool-gray bg-white shadow-soft"><div class="cover-frame"><img src="mywork/%E7%AC%AC3%E7%AF%87.png" alt="實戰管理解析第 3 篇封面" loading="lazy" /></div><figcaption class="px-5 py-4 font-serif text-lg text-carlos-navy">實戰管理解析｜第 3 篇</figcaption></figure>
+          <figure class="cover-card reveal overflow-hidden rounded-xl border border-cool-gray bg-white shadow-soft"><div class="cover-frame"><img src="mywork/%E7%AC%AC4%E7%AF%87.png" alt="實戰管理解析第 4 篇封面" loading="lazy" /></div><figcaption class="px-5 py-4 font-serif text-lg text-carlos-navy">實戰管理解析｜第 4 篇</figcaption></figure>
+          <figure class="cover-card reveal overflow-hidden rounded-xl border border-cool-gray bg-white shadow-soft"><div class="cover-frame"><img src="mywork/%E7%AC%AC5%E7%AF%87.png" alt="實戰管理解析第 5 篇封面" loading="lazy" /></div><figcaption class="px-5 py-4 font-serif text-lg text-carlos-navy">實戰管理解析｜第 5 篇</figcaption></figure>
+          <figure class="cover-card reveal overflow-hidden rounded-xl border border-cool-gray bg-white shadow-soft"><div class="cover-frame"><img src="mywork/%E7%AC%AC6%E7%AF%87.png" alt="實戰管理解析第 6 篇封面" loading="lazy" /></div><figcaption class="px-5 py-4 font-serif text-lg text-carlos-navy">實戰管理解析｜第 6 篇</figcaption></figure>
+          <figure class="cover-card reveal overflow-hidden rounded-xl border border-cool-gray bg-white shadow-soft"><div class="cover-frame"><img src="mywork/%E7%AC%AC9%E7%AF%87.png" alt="實戰管理解析第 9 篇封面" loading="lazy" /></div><figcaption class="px-5 py-4 font-serif text-lg text-carlos-navy">實戰管理解析｜第 9 篇</figcaption></figure>
+          <figure class="cover-card reveal overflow-hidden rounded-xl border border-cool-gray bg-white shadow-soft"><div class="cover-frame"><img src="mywork/%E7%AC%AC11%E7%AF%87.png" alt="實戰管理解析第 11 篇封面" loading="lazy" /></div><figcaption class="px-5 py-4 font-serif text-lg text-carlos-navy">實戰管理解析｜第 11 篇</figcaption></figure>
+          <figure class="cover-card reveal overflow-hidden rounded-xl border border-cool-gray bg-white shadow-soft"><div class="cover-frame"><img src="mywork/%E7%AC%AC12%E7%AF%87.png" alt="實戰管理解析第 12 篇封面" loading="lazy" /></div><figcaption class="px-5 py-4 font-serif text-lg text-carlos-navy">實戰管理解析｜第 12 篇</figcaption></figure>
+          <figure class="cover-card reveal overflow-hidden rounded-xl border border-cool-gray bg-white shadow-soft"><div class="cover-frame"><img src="mywork/%E7%AC%AC15%E7%AF%87.png" alt="實戰管理解析第 15 篇封面" loading="lazy" /></div><figcaption class="px-5 py-4 font-serif text-lg text-carlos-navy">實戰管理解析｜第 15 篇</figcaption></figure>
+          <figure class="cover-card reveal overflow-hidden rounded-xl border border-cool-gray bg-white shadow-soft"><div class="cover-frame"><img src="mywork/%E7%AC%AC18%E7%AF%87.png" alt="實戰管理解析第 18 篇封面" loading="lazy" /></div><figcaption class="px-5 py-4 font-serif text-lg text-carlos-navy">實戰管理解析｜第 18 篇</figcaption></figure>
+          <figure class="cover-card reveal overflow-hidden rounded-xl border border-cool-gray bg-white shadow-soft"><div class="cover-frame"><img src="mywork/%E7%AC%AC20%E7%AF%87.png" alt="實戰管理解析第 20 篇封面" loading="lazy" /></div><figcaption class="px-5 py-4 font-serif text-lg text-carlos-navy">實戰管理解析｜第 20 篇</figcaption></figure>
+          <figure class="cover-card reveal overflow-hidden rounded-xl border border-cool-gray bg-white shadow-soft"><div class="cover-frame"><img src="mywork/%E7%AC%AC21%E7%AF%87.png" alt="實戰管理解析第 21 篇封面" loading="lazy" /></div><figcaption class="px-5 py-4 font-serif text-lg text-carlos-navy">實戰管理解析｜第 21 篇</figcaption></figure>
+          <figure class="cover-card reveal overflow-hidden rounded-xl border border-cool-gray bg-white shadow-soft"><div class="cover-frame"><img src="mywork/%E7%AC%AC23%E7%AF%87.png" alt="實戰管理解析第 23 篇封面" loading="lazy" /></div><figcaption class="px-5 py-4 font-serif text-lg text-carlos-navy">實戰管理解析｜第 23 篇</figcaption></figure>
+          <figure class="cover-card reveal overflow-hidden rounded-xl border border-cool-gray bg-white shadow-soft"><div class="cover-frame"><img src="mywork/%E7%AC%AC30%E7%AF%87.png" alt="實戰管理解析第 30 篇封面" loading="lazy" /></div><figcaption class="px-5 py-4 font-serif text-lg text-carlos-navy">實戰管理解析｜第 30 篇</figcaption></figure>
+          <figure class="cover-card reveal overflow-hidden rounded-xl border border-cool-gray bg-white shadow-soft"><div class="cover-frame"><img src="mywork/%E7%AC%AC34%E7%AF%87.png" alt="實戰管理解析第 34 篇封面" loading="lazy" /></div><figcaption class="px-5 py-4 font-serif text-lg text-carlos-navy">實戰管理解析｜第 34 篇</figcaption></figure>
+        </div>
       </div>
     </section>
 
