@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卡洛斯管理顧問 | Carlos Management Consulting</title>
+    <meta name="description" content="卡洛斯｜新手主管的實戰觀察。冷靜地看懂管理現場，陪新手主管站穩第一步。">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'carlos-navy': '#0F1E3A',
+                        'steel-blue': '#3E5C80',
+                        'olive-green': '#8A8F3D',
+                        'warm-white': '#F8F8F5',
+                        'cool-gray': '#E6E8EB',
+                        'charcoal': '#1A1A1A',
+                    },
+                    fontFamily: {
+                        sans: ['"Inter"', '"Noto Sans TC"', 'sans-serif'],
+                        serif: ['"Noto Serif TC"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom CSS Styles -->
+    <style>
+        :root {
+            --carlos-navy: #0F1E3A;
+            --steel-blue: #3E5C80;
+            --olive-green: #8A8F3D;
+            --warm-white: #F8F8F5;
+            --cool-gray: #E6E8EB;
+            --charcoal: #1A1A1A;
+        }
+
+        /* Editorial Focus State */
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--steel-blue);
+            outline-offset: 4px;
+        }
+
+        /* Hero Typewriter Caret */
+        .caret {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background-color: var(--carlos-navy);
+            margin-left: 3px;
+            vertical-align: middle;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Carlos Hover Signature for Editorial Cards */
+        .carlos-card {
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                        border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+        }
+        
+        .carlos-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background-color: var(--olive-green);
+            transition: height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            border-top-left-radius: 12px;
+        }
+
+        .carlos-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--steel-blue);
+            box-shadow: 0 12px 30px -10px rgba(15, 30, 58, 0.08);
+        }
+
+        .carlos-card:hover::before {
+            height: 100%;
+        }
+
+        .carlos-card:hover .arrow-icon {
+            transform: translateX(4px);
+            color: var(--steel-blue);
+        }
+
+        .carlos-card:hover .card-title {
+            color: var(--steel-blue);
+        }
+
+        /* Subtle Geometric Background Pattern */
+        .hero-pattern {
+            background-image: radial-gradient(rgba(15, 30, 58, 0.04) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        /* Progressive Reveal Default for JS */
+        .js .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .js .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            .caret { animation: none; }
+            .carlos-card { transition: none; }
+            .carlos-card:hover { transform: none; }
+            .js .reveal { transition: none; opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body class="bg-white text-charcoal font-sans antialiased selection:bg-steel-blue/20 selection:text-carlos-navy">
+
+    <script>document.documentElement.classList.add('js');</script>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-cool-gray transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo / Identity -->
+            <a href="#" class="group flex items-center gap-3 text-carlos-navy focus:outline-none" aria-label="卡洛斯管理顧問 首頁">
+                <div class="w-10 h-11 flex items-center justify-center rounded-sm transition-transform group-hover:scale-105">
+                    <img src="logo.png" alt="卡洛斯管理顧問 LOGO" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x110/0F1E3A/FFFFFF?text=CARLOS';">
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif font-bold text-xl tracking-tight text-carlos-navy leading-none">卡洛斯</span>
+                    <span class="text-[9px] tracking-[0.18em] text-steel-blue font-medium uppercase mt-1">CARLOS MANAGEMENT</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation (7 Items) -->
+            <nav class="hidden lg:flex items-center space-x-8 text-sm font-medium text-charcoal/80">
+                <a href="#about" class="hover:text-carlos-navy transition-colors py-2">About</a>
+                <a href="#method" class="hover:text-carlos-navy transition-colors py-2">Method</a>
+                <a href="#services" class="hover:text-carlos-navy transition-colors py-2">Services</a>
+                <a href="#insights" class="hover:text-carlos-navy transition-colors py-2">Insights</a>
+                <a href="#cases" class="hover:text-carlos-navy transition-colors py-2">Cases</a>
+                <a href="#subscribe" class="hover:text-carlos-navy transition-colors py-2">Subscribe</a>
+                <a href="#consultation" class="px-5 py-2.5 bg-carlos-navy text-white rounded-md text-xs tracking-wider uppercase font-semibold hover:bg-steel-blue transition-all flex items-center gap-1.5 shadow-sm">
+                    Consultation
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </nav>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" class="lg:hidden p-2 text-carlos-navy focus:outline-none" aria-label="打開選單" aria-expanded="false">
+                <i data-lucide="menu" id="menu-icon-open" class="w-6 h-6"></i>
+                <i data-lucide="x" id="menu-icon-close" class="w-6 h-6 hidden"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-warm-white border-b border-cool-gray px-6 py-6 shadow-lg">
+            <div class="flex flex-col space-y-4 text-base font-medium">
+                <a href="#about" class="mobile-nav-link text-charcoal/80 hover:text-carlos-navy py-1">About｜關於卡洛斯</a>
+                <a href="#method" class="mobile-nav-link text-charcoal/80 hover:text-carlos-navy py-1">Method｜管理框架</a>
+                <a href="#services" class="mobile-nav-link text-charcoal/80 hover:text-carlos-navy py-1">Services｜服務項目</a>
+                <a href="#insights" class="mobile-nav-link text-charcoal/80 hover:text-carlos-navy py-1">Insights｜管理現場筆記</a>
+                <a href="#cases" class="mobile-nav-link text-charcoal/80 hover:text-carlos-navy py-1">Cases｜管理情境拆解</a>
+                <a href="#subscribe" class="mobile-nav-link text-charcoal/80 hover:text-carlos-navy py-1">Subscribe｜訂閱專欄</a>
+                <a href="https://calendar.app.google/J85Lxbxq5Jn2em9z7" target="_blank" rel="noopener noreferrer" class="mobile-nav-link mt-2 inline-flex items-center justify-center gap-2 px-5 py-3 bg-carlos-navy text-white text-sm font-semibold rounded-md hover:bg-steel-blue transition-colors">
+                    預約管理諮詢 ↗
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-[90vh] flex items-center justify-center bg-white hero-pattern py-20 lg:py-28 overflow-hidden border-b border-cool-gray">
+            <div class="max-w-5xl mx-auto px-6 md:px-12 text-center relative z-10">
+                
+                <!-- Stage 01: Official Brand Logo Emblem -->
+                <div id="hero-mark" class="opacity-0 transition-opacity duration-1000 flex justify-center mb-6">
+                    <div class="w-28 h-32 md:w-36 md:h-40 drop-shadow-md flex items-center justify-center">
+                        <img src="logo.png" alt="卡洛斯管理顧問 LOGO" class="max-w-full max-h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/140x160/0F1E3A/FFFFFF?text=CARLOS';">
+                    </div>
+                </div>
+
+                <!-- Stage 02: Eyebrow with Gradient Divider Lines -->
+                <div id="hero-eyebrow" class="opacity-0 transition-opacity duration-1000 mb-6">
+                    <div class="flex items-center justify-center gap-3">
+                        <span class="h-[1px] w-8 md:w-16 bg-gradient-to-r from-transparent to-olive-green"></span>
+                        <span class="text-sm md:text-base font-semibold text-carlos-navy tracking-[0.2em]">新手主管的實戰觀察</span>
+                        <span class="h-[1px] w-8 md:w-16 bg-gradient-to-l from-transparent to-olive-green"></span>
+                    </div>
+                    <span class="text-[11px] tracking-[0.2em] text-steel-blue font-medium uppercase mt-2 block">CARLOS MANAGEMENT CONSULTING</span>
+                </div>
+
+                <!-- Stage 03: Hero H1 (Thinking Typewriter) -->
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-carlos-navy leading-[1.25] tracking-tight mb-8 min-h-[3.6em] sm:min-h-[2.5em] md:min-h-[2.4em] flex items-center justify-center max-w-4xl mx-auto">
+                    <span id="typewriter-text"></span><span id="typewriter-caret" class="caret hidden"></span>
+                </h1>
+
+                <!-- Stage 04: Supporting Identity & Statement -->
+                <div id="hero-supporting" class="opacity-0 translate-y-4 transition-all duration-1000 max-w-2xl mx-auto space-y-4 mb-10">
+                    <p class="text-sm md:text-base font-semibold text-olive-green tracking-wide">
+                        卡洛斯｜新手主管的實戰觀察
+                    </p>
+                    <p class="text-lg md:text-xl font-serif text-charcoal/90 leading-relaxed">
+                        很多管理問題，不是你不會，<br class="hidden sm:inline">而是從來沒有人告訴你正在發生什麼。
+                    </p>
+                    <p class="text-sm md:text-base text-charcoal/70 leading-relaxed max-w-xl mx-auto font-light">
+                        從第一天成為主管開始，陪你看懂角色、團隊與組織真正發生的事，從「做事的人」，穩穩走向「會帶人的主管」。
+                    </p>
+                </div>
+
+                <!-- Stage 05: Primary & Secondary CTAs -->
+                <div id="hero-cta" class="opacity-0 translate-y-4 transition-all duration-1000 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#insights" class="w-full sm:w-auto px-8 py-4 bg-carlos-navy text-white text-sm font-medium rounded-md hover:bg-steel-blue transition-all duration-300 flex items-center justify-center gap-2 group shadow-sm">
+                        <span>探索管理觀察</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="https://calendar.app.google/J85Lxbxq5Jn2em9z7" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 bg-white text-carlos-navy border border-steel-blue/30 text-sm font-medium rounded-md hover:bg-steel-blue/5 hover:border-carlos-navy transition-all duration-300 flex items-center justify-center gap-2 group">
+                        <span>預約管理諮詢</span>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-steel-blue group-hover:text-olive-green transition-colors"></i>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Brand Statement Section -->
+        <section class="py-24 bg-warm-white border-b border-cool-gray">
+            <div class="max-w-5xl mx-auto px-6 md:px-12">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <span class="text-xs uppercase tracking-[0.18em] font-bold text-steel-blue block mb-3">BRAND POSITIONING</span>
+                    <h2 class="text-2xl md:text-4xl font-serif font-bold text-carlos-navy leading-tight mb-6">
+                        管理不是知道更多答案，<br>而是學會看懂正在發生什麼。
+                    </h2>
+                    <p class="text-base md:text-lg text-charcoal/80 leading-relaxed font-light">
+                        很多新手主管不是不努力，而是缺少可以參考的判斷框架。
+                    </p>
+                </div>
+
+                <!-- Management Field Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-16 reveal">
+                    <div class="bg-white p-6 rounded-lg border border-cool-gray text-center">
+                        <span class="text-xs font-semibold text-steel-blue uppercase tracking-wider block mb-2">FIELD 01</span>
+                        <h3 class="font-serif font-bold text-carlos-navy text-lg">目標壓力</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-cool-gray text-center">
+                        <span class="text-xs font-semibold text-steel-blue uppercase tracking-wider block mb-2">FIELD 02</span>
+                        <h3 class="font-serif font-bold text-carlos-navy text-lg">團隊情緒</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-cool-gray text-center">
+                        <span class="text-xs font-semibold text-steel-blue uppercase tracking-wider block mb-2">FIELD 03</span>
+                        <h3 class="font-serif font-bold text-carlos-navy text-lg">部屬配合度</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-cool-gray text-center">
+                        <span class="text-xs font-semibold text-steel-blue uppercase tracking-wider block mb-2">FIELD 04</span>
+                        <h3 class="font-serif font-bold text-carlos-navy text-lg">主管期待</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-cool-gray text-center">
+                        <span class="text-xs font-semibold text-steel-blue uppercase tracking-wider block mb-2">FIELD 05</span>
+                        <h3 class="font-serif font-bold text-carlos-navy text-lg">跨部門合作</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-cool-gray text-center">
+                        <span class="text-xs font-semibold text-steel-blue uppercase tracking-wider block mb-2">FIELD 06</span>
+                        <h3 class="font-serif font-bold text-carlos-navy text-lg">顧客需求</h3>
+                    </div>
+                </div>
+
+                <!-- Callout Box -->
+                <div class="bg-white p-8 md:p-10 rounded-xl border border-cool-gray shadow-sm reveal max-w-4xl mx-auto">
+                    <p class="text-center text-charcoal/80 leading-relaxed mb-8 font-light">
+                        如果只靠個性與直覺，很容易越帶越累，也越管越孤單。<br>
+                        Carlos Management Consulting 希望透過專屬資源幫助主管經歷：
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-sm font-semibold text-carlos-navy">
+                        <span class="px-4 py-2 bg-warm-white rounded border border-cool-gray">01 看見問題</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-steel-blue hidden sm:block"></i>
+                        <span class="px-4 py-2 bg-warm-white rounded border border-cool-gray">02 理解問題</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-steel-blue hidden sm:block"></i>
+                        <span class="px-4 py-2 bg-warm-white rounded border border-cool-gray">03 建立判斷</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-steel-blue hidden sm:block"></i>
+                        <span class="px-4 py-2 bg-carlos-navy text-white rounded">04 採取行動</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leadership Journey Section -->
+        <section class="py-24 bg-white border-b border-cool-gray">
+            <div class="max-w-5xl mx-auto px-6 md:px-12">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <span class="text-xs uppercase tracking-[0.18em] font-bold text-steel-blue block mb-3">LEADERSHIP JOURNEY</span>
+                    <h2 class="text-2xl md:text-4xl font-serif font-bold text-carlos-navy leading-tight">
+                        主管的角色轉換歷程
+                    </h2>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-6 relative reveal">
+                    <!-- Step 01 -->
+                    <div class="bg-warm-white p-6 rounded-lg border border-cool-gray flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-olive-green uppercase tracking-wider block mb-3">STEP 01</span>
+                            <h3 class="text-base font-serif font-bold text-carlos-navy mb-2">個人貢獻者</h3>
+                            <p class="text-sm text-charcoal/70 leading-relaxed font-light">從「做好自己的事」開始建立個人專業信任。</p>
+                        </div>
+                    </div>
+                    <!-- Step 02 -->
+                    <div class="bg-warm-white p-6 rounded-lg border border-cool-gray flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-olive-green uppercase tracking-wider block mb-3">STEP 02</span>
+                            <h3 class="text-base font-serif font-bold text-carlos-navy mb-2">初任管理者</h3>
+                            <p class="text-sm text-charcoal/70 leading-relaxed font-light">成為「開始帶人的主管」，面對責任邊界移轉。</p>
+                        </div>
+                    </div>
+                    <!-- Step 03 -->
+                    <div class="bg-warm-white p-6 rounded-lg border border-cool-gray flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-olive-green uppercase tracking-wider block mb-3">STEP 03</span>
+                            <h3 class="text-base font-serif font-bold text-carlos-navy mb-2">團隊推動者</h3>
+                            <p class="text-sm text-charcoal/70 leading-relaxed font-light">學會「讓團隊完成事情」，轉化任務與賦能。</p>
+                        </div>
+                    </div>
+                    <!-- Step 04 -->
+                    <div class="bg-carlos-navy text-white p-6 rounded-lg flex flex-col justify-between shadow-md">
+                        <div>
+                            <span class="text-xs font-bold text-olive-green uppercase tracking-wider block mb-3">STEP 04</span>
+                            <h3 class="text-base font-serif font-bold text-white mb-2">組織思考者</h3>
+                            <p class="text-sm text-white/80 leading-relaxed font-light">理解「自己正在組織中扮演什麼角色」，驅動整體綜效。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 text-center reveal">
+                    <p class="inline-block px-6 py-3 bg-warm-white border border-cool-gray rounded-full text-sm font-serif font-bold text-carlos-navy">
+                        核心目標：從做事的人，穩穩走向會帶人的主管。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Carlos Section -->
+        <section id="about" class="py-24 bg-warm-white border-b border-cool-gray">
+            <div class="max-w-5xl mx-auto px-6 md:px-12">
+                <div class="grid lg:grid-cols-12 gap-12 items-start">
+                    
+                    <!-- Left Column: Identity & Quote -->
+                    <div class="lg:col-span-5 reveal">
+                        <span class="text-xs uppercase tracking-[0.18em] font-bold text-steel-blue block mb-3">ABOUT FOUNDER</span>
+                        <h2 class="text-3xl font-serif font-bold text-carlos-navy mb-2">卡洛斯</h2>
+                        <p class="text-sm font-medium text-steel-blue mb-6">卡洛斯管理顧問 創辦人｜實戰型管理教練</p>
+                        
+                        <!-- Editorial Quote Box -->
+                        <div class="p-6 bg-white border-l-2 border-olive-green rounded-r-lg shadow-sm my-6">
+                            <blockquote class="font-serif text-lg text-carlos-navy leading-relaxed font-medium">
+                                「管理不是有了職稱就自然會發生，而是在真正開始帶人之後，才開始學習。」
+                            </blockquote>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Bio & Verified Experience -->
+                    <div class="lg:col-span-7 space-y-6 text-charcoal/80 leading-relaxed font-light reveal">
+                        <p class="text-base">
+                            我是一位專注於新手主管成長的實戰型管理教練。我關注的不是遙遠的高階管理理論，而是新手主管真正會遇到的第一線問題：
+                        </p>
+                        
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm font-medium text-carlos-navy pt-2">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-olive-green"></i>剛升主管後如何站穩角色</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-olive-green"></i>如何帶領團隊與交辦任務</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-olive-green"></i>如何面對資深員工配合度</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-olive-green"></i>如何處理向上管理與期待</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-olive-green"></i>如何進行跨部門溝通協調</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-olive-green"></i>如何面對目標與績效壓力</li>
+                        </ul>
+
+                        <p class="text-base pt-2">
+                            我的目標，是把那些：<strong class="font-semibold text-carlos-navy">沒人教，也不好問的管理難題，慢慢講清楚。</strong>
+                        </p>
+                        
+                        <p class="text-sm text-charcoal/70 bg-white p-4 rounded border border-cool-gray">
+                            管理經驗來自真實組織現場。畢業後進入上市公司工作，之後被派任至子公司擔任經理，歷經多個組織與管理職務，累積約 15 年第一線工作與管理經驗，曾帶領數十人團隊，並負責大型通路營運。
+                        </p>
+
+                        <!-- Data Summary (Only Known Info) -->
+                        <div class="grid grid-cols-3 gap-4 pt-6 border-t border-cool-gray text-center">
+                            <div>
+                                <span class="block text-2xl md:text-3xl font-serif font-bold text-carlos-navy">15</span>
+                                <span class="text-[10px] md:text-xs uppercase tracking-wider text-steel-blue font-semibold">YEARS OF EXPERIENCE</span>
+                            </div>
+                            <div>
+                                <span class="block text-2xl md:text-3xl font-serif font-bold text-carlos-navy">MULTI</span>
+                                <span class="text-[10px] md:text-xs uppercase tracking-wider text-steel-blue font-semibold">ORGANIZATION EXP.</span>
+                            </div>
+                            <div>
+                                <span class="block text-2xl md:text-3xl font-serif font-bold text-carlos-navy">TEAM</span>
+                                <span class="text-[10px] md:text-xs uppercase tracking-wider text-steel-blue font-semibold">LEADERSHIP EXP.</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Methodology Section (Signature Framework) -->
+        <section id="method" class="py-24 bg-white border-b border-cool-gray">
+            <div class="max-w-5xl mx-auto px-6 md:px-12">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <span class="text-xs uppercase tracking-[0.18em] font-bold text-steel-blue block mb-3">SIGNATURE METHODOLOGY</span>
+                    <h2 class="text-2xl md:text-4xl font-serif font-bold text-carlos-navy leading-tight mb-4">
+                        卡洛斯管理思考框架
+                    </h2>
+                    <p class="text-base text-charcoal/70 font-light">
+                        協助主管建立清晰邏輯，從混亂現象中找回決策主導權。
+                    </p>
+                </div>
+
+                <!-- Framework Steps Process -->
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative reveal">
+                    
+                    <!-- Step 01 -->
+                    <div class="bg-warm-white p-5 rounded-lg border border-cool-gray text-center flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-steel-blue uppercase block mb-1">01</span>
+                            <span class="text-xs text-charcoal/50 uppercase tracking-widest block mb-2">Observation</span>
+                            <h3 class="font-serif font-bold text-carlos-navy text-lg mb-2">觀察</h3>
+                        </div>
+                        <p class="text-xs text-charcoal/70 leading-relaxed font-light mt-2">冷靜客觀紀錄管理現場事實。</p>
+                    </div>
+
+                    <!-- Step 02 -->
+                    <div class="bg-warm-white p-5 rounded-lg border border-cool-gray text-center flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-steel-blue uppercase block mb-1">02</span>
+                            <span class="text-xs text-charcoal/50 uppercase tracking-widest block mb-2">Insight</span>
+                            <h3 class="font-serif font-bold text-carlos-navy text-lg mb-2">洞察</h3>
+                        </div>
+                        <p class="text-xs text-charcoal/70 leading-relaxed font-light mt-2">看透行為背後的角色與動機。</p>
+                    </div>
+
+                    <!-- Step 03 -->
+                    <div class="bg-warm-white p-5 rounded-lg border border-cool-gray text-center flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-steel-blue uppercase block mb-1">03</span>
+                            <span class="text-xs text-charcoal/50 uppercase tracking-widest block mb-2">Judgment</span>
+                            <h3 class="font-serif font-bold text-carlos-navy text-lg mb-2">判斷</h3>
+                        </div>
+                        <p class="text-xs text-charcoal/70 leading-relaxed font-light mt-2">依據組織目標建立決策優先順序。</p>
+                    </div>
+
+                    <!-- Step 04 -->
+                    <div class="bg-warm-white p-5 rounded-lg border border-cool-gray text-center flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-steel-blue uppercase block mb-1">04</span>
+                            <span class="text-xs text-charcoal/50 uppercase tracking-widest block mb-2">Action</span>
+                            <h3 class="font-serif font-bold text-carlos-navy text-lg mb-2">行動</h3>
+                        </div>
+                        <p class="text-xs text-charcoal/70 leading-relaxed font-light mt-2">進行明確交辦與溝通對齊。</p>
+                    </div>
+
+                    <!-- Step 05 -->
+                    <div class="bg-carlos-navy text-white p-5 rounded-lg text-center flex flex-col justify-between shadow-sm">
+                        <div>
+                            <span class="text-xs font-bold text-olive-green uppercase block mb-1">05</span>
+                            <span class="text-xs text-white/50 uppercase tracking-widest block mb-2">Growth</span>
+                            <h3 class="font-serif font-bold text-white text-lg mb-2">成長</h3>
+                        </div>
+                        <p class="text-xs text-white/80 leading-relaxed font-light mt-2">建立團隊自主運作與信任循環。</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-24 bg-warm-white border-b border-cool-gray">
+            <div class="max-w-5xl mx-auto px-6 md:px-12">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <span class="text-xs uppercase tracking-[0.18em] font-bold text-steel-blue block mb-3">OUR SERVICES</span>
+                    <h2 class="text-2xl md:text-4xl font-serif font-bold text-carlos-navy leading-tight mb-4">
+                        陪主管把管理能力，真正用在現場。
+                    </h2>
+                    <p class="text-base text-charcoal/70 font-light">
+                        專注於新手主管成長的實戰型管理教練與管理顧問服務。
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+                    
+                    <!-- Service 01 -->
+                    <div class="bg-white p-8 rounded-xl border border-cool-gray carlos-card flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-steel-blue uppercase tracking-widest block mb-2">01｜企業內訓</span>
+                            <h3 class="text-lg font-serif font-bold text-carlos-navy mb-1 card-title">FIRST-TIME MANAGER TRAINING</h3>
+                            <p class="text-xs text-olive-green font-semibold mb-4">針對企業新任主管與儲備主管設計管理訓練</p>
+                            <p class="text-sm text-charcoal/70 leading-relaxed font-light">陪伴新手主管建構明確的角色認知，快速上手溝通、任務分派與團隊輔導基礎技能。</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 02 -->
+                    <div class="bg-white p-8 rounded-xl border border-cool-gray carlos-card flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-steel-blue uppercase tracking-widest block mb-2">02｜主管工作坊</span>
+                            <h3 class="text-lg font-serif font-bold text-carlos-navy mb-1 card-title">LEADERSHIP WORKSHOP</h3>
+                            <p class="text-xs text-olive-green font-semibold mb-4">透過管理案例與情境演練建立判斷框架</p>
+                            <p class="text-sm text-charcoal/70 leading-relaxed font-light">深入真實場景的個案拆解與互動練習，培養可落地操作的管理決策思維。</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 03 -->
+                    <div class="bg-white p-8 rounded-xl border border-cool-gray carlos-card flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-steel-blue uppercase tracking-widest block mb-2">03｜主題講座</span>
+                            <h3 class="text-lg font-serif font-bold text-carlos-navy mb-1 card-title">KEYNOTE / SEMINAR</h3>
+                            <p class="text-xs text-olive-green font-semibold mb-4">針對角色轉換、帶人、交辦主題分享</p>
+                            <p class="text-sm text-charcoal/70 leading-relaxed font-light">精準講授向上管理、跨部門協調與新任角色心態調適等核心課題。</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 04 -->
+                    <div class="bg-white p-8 rounded-xl border border-cool-gray carlos-card flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-steel-blue uppercase tracking-widest block mb-2">04｜管理工具</span>
+                            <h3 class="text-lg font-serif font-bold text-carlos-navy mb-1 card-title">MANAGEMENT TOOLKIT</h3>
+                            <p class="text-xs text-olive-green font-semibold mb-4">提供主管可以直接使用的表單與工具</p>
+                            <p class="text-sm text-charcoal/70 leading-relaxed font-light">提供 Framework、Checklist 與 Template 等實用工具，大幅降低落實門檻。</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 05 -->
+                    <div class="bg-white p-8 rounded-xl border border-cool-gray carlos-card flex flex-col justify-between md:col-span-2 lg:col-span-2">
+                        <div>
+                            <span class="text-xs font-bold text-steel-blue uppercase tracking-widest block mb-2">05｜管理顧問與諮詢</span>
+                            <h3 class="text-lg font-serif font-bold text-carlos-navy mb-1 card-title">MANAGEMENT CONSULTING</h3>
+                            <p class="text-xs text-olive-green font-semibold mb-4">協助主管與企業釐清管理問題與人才需求</p>
+                            <p class="text-sm text-charcoal/70 leading-relaxed font-light mb-6">對齊企業戰略目標與團隊運作盲點，針對基層及中階主管發展提供客製化顧問與深度對話。</p>
+                        </div>
+                        <div>
+                            <a href="https://calendar.app.google/J85Lxbxq5Jn2em9z7" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs uppercase font-bold tracking-wider text-carlos-navy hover:text-steel-blue transition-colors">
+                                預約管理諮詢 <i data-lucide="arrow-up-right" class="w-4 h-4 text-steel-blue"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Management Notes Section -->
+        <section id="insights" class="py-24 bg-white border-b border-cool-gray">
+            <div class="max-w-5xl mx-auto px-6 md:px-12">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 reveal">
+                    <div>
+                        <span class="text-xs uppercase tracking-[0.18em] font-bold text-steel-blue block mb-2">MANAGEMENT NOTES</span>
+                        <h2 class="text-2xl md:text-4xl font-serif font-bold text-carlos-navy">管理現場筆記</h2>
+                    </div>
+                    <p class="text-sm text-charcoal/70 font-light mt-2 md:mt-0">
+                        從真實情境出發，重新看懂主管每天面對的選擇。
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+                    
+                    <!-- Article 01 -->
+                    <div class="bg-warm-white p-6 rounded-xl border border-cool-gray carlos-card flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold tracking-widest text-steel-blue block mb-3">剛升主管</span>
+                            <h3 class="text-base font-serif font-bold text-carlos-navy leading-snug mb-3 card-title">
+                                升主管之後，為什麼原本的工作方式突然不管用了？
+                            </h3>
+                            <p class="text-xs text-charcoal/70 leading-relaxed font-light mb-6">
+                                從「靠自己產出」到「透過他人達成目標」，核心能力的重新定焦過程。
+                            </p>
+                        </div>
+                        <button onclick="event.preventDefault();" class="self-start text-xs font-semibold text-carlos-navy flex items-center gap-1.5 focus:outline-none">
+                            <span>閱讀觀察</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 arrow-icon transition-transform"></i>
+                        </button>
+                    </div>
+
+                    <!-- Article 02 -->
+                    <div class="bg-warm-white p-6 rounded-xl border border-cool-gray carlos-card flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold tracking-widest text-steel-blue block mb-3">團隊帶領</span>
+                            <h3 class="text-base font-serif font-bold text-carlos-navy leading-snug mb-3 card-title">
+                                部屬不是不配合，可能是他根本不知道你期待什麼。
+                            </h3>
+                            <p class="text-xs text-charcoal/70 leading-relaxed font-light mb-6">
+                                釐清「完成任務」與「符合期待」之間的溝通落差與對齊架構。
+                            </p>
+                        </div>
+                        <button onclick="event.preventDefault();" class="self-start text-xs font-semibold text-carlos-navy flex items-center gap-1.5 focus:outline-none">
+                            <span>閱讀觀察</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 arrow-icon transition-transform"></i>
+                        </button>
+                    </div>
+
+                    <!-- Article 03 -->
+                    <div class="bg-warm-white p-6 rounded-xl border border-cool-gray carlos-card flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold tracking-widest text-steel-blue block mb-3">任務交辦</span>
+                            <h3 class="text-base font-serif font-bold text-carlos-navy leading-snug mb-3 card-title">
+                                交辦不是把事情說出去，而是確認理解真的發生。
+                            </h3>
+                            <p class="text-xs text-charcoal/70 leading-relaxed font-light mb-6">
+                                如何避免「你以為講清楚，對方卻做錯」的常見交辦誤區。
+                            </p>
+                        </div>
+                        <button onclick="event.preventDefault();" class="self-start text-xs font-semibold text-carlos-navy flex items-center gap-1.5 focus:outline-none">
+                            <span>閱讀觀察</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 arrow-icon transition-transform"></i>
+                        </button>
+                    </div>
+
+                    <!-- Article 04 -->
+                    <div class="bg-warm-white p-6 rounded-xl border border-cool-gray carlos-card flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold tracking-widest text-steel-blue block mb-3">資深員工</span>
+                            <h3 class="text-base font-serif font-bold text-carlos-navy leading-snug mb-3 card-title">
+                                第一次帶比自己資深的人，主管真正需要建立的是什麼？
+                            </h3>
+                            <p class="text-xs text-charcoal/70 leading-relaxed font-light mb-6">
+                                不必刻意擺出架子，如何運用尊重與權責邊界建立領導權威。
+                            </p>
+                        </div>
+                        <button onclick="event.preventDefault();" class="self-start text-xs font-semibold text-carlos-navy flex items-center gap-1.5 focus:outline-none">
+                            <span>閱讀觀察</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 arrow-icon transition-transform"></i>
+                        </button>
+                    </div>
+
+                    <!-- Article 05 -->
+                    <div class="bg-warm-white p-6 rounded-xl border border-cool-gray carlos-card flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold tracking-widest text-steel-blue block mb-3">向上管理</span>
+                            <h3 class="text-base font-serif font-bold text-carlos-navy leading-snug mb-3 card-title">
+                                主管說「你自己看著辦」，到底代表什麼？
+                            </h3>
+                            <p class="text-xs text-charcoal/70 leading-relaxed font-light mb-6">
+                                解讀上級授權背後的期待與隱含風險，掌握回報的正確節奏。
+                            </p>
+                        </div>
+                        <button onclick="event.preventDefault();" class="self-start text-xs font-semibold text-carlos-navy flex items-center gap-1.5 focus:outline-none">
+                            <span>閱讀觀察</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 arrow-icon transition-transform"></i>
+                        </button>
+                    </div>
+
+                    <!-- Article 06 -->
+                    <div class="bg-warm-white p-6 rounded-xl border border-cool-gray carlos-card flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold tracking-widest text-steel-blue block mb-3">跨部門溝通</span>
+                            <h3 class="text-base font-serif font-bold text-carlos-navy leading-snug mb-3 card-title">
+                                跨部門不是溝通能力問題，有時候是角色與目標根本不同。
+                            </h3>
+                            <p class="text-xs text-charcoal/70 leading-relaxed font-light mb-6">
+                                從組織立場與利益交集出發，打破對立困局的協商邏輯。
+                            </p>
+                        </div>
+                        <button onclick="event.preventDefault();" class="self-start text-xs font-semibold text-carlos-navy flex items-center gap-1.5 focus:outline-none">
+                            <span>閱讀觀察</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 arrow-icon transition-transform"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Management Situations Section -->
+        <section id="cases" class="py-24 bg-warm-white border-b border-cool-gray">
+            <div class="max-w-5xl mx-auto px-6 md:px-12">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <div class="inline-block px-3 py-1 bg-white border border-cool-gray rounded text-xs font-bold text-steel-blue uppercase tracking-widest mb-3">
+                        管理情境示例
+                    </div>
+                    <h2 class="text-2xl md:text-4xl font-serif font-bold text-carlos-navy leading-tight">
+                        管理情境拆解
+                    </h2>
+                </div>
+
+                <div class="space-y-8 reveal">
+                    
+                    <!-- Case 01 -->
+                    <div class="bg-white p-8 rounded-xl border border-cool-gray shadow-sm">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-xs font-bold text-white bg-carlos-navy px-2.5 py-1 rounded">CASE 01</span>
+                            <h3 class="text-lg font-serif font-bold text-carlos-navy">新主管開始帶以前的同事</h3>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6 pt-2 border-t border-cool-gray/60">
+                            <div>
+                                <span class="text-xs font-semibold text-steel-blue uppercase block mb-1">Problem｜難題現場</span>
+                                <p class="text-sm text-charcoal/80 leading-relaxed font-light">角色界線突然改變，平輩變成上下級，溝通感到尷尬或硬不起來。</p>
+                            </div>
+                            <div>
+                                <span class="text-xs font-semibold text-olive-green uppercase block mb-1">Core Observation｜核心觀察</span>
+                                <p class="text-sm text-charcoal/80 leading-relaxed font-light">主管需要處理的不是「我要不要擺出主管架子」，而是重新建立責任與決策邊界。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 02 -->
+                    <div class="bg-white p-8 rounded-xl border border-cool-gray shadow-sm">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-xs font-bold text-white bg-carlos-navy px-2.5 py-1 rounded">CASE 02</span>
+                            <h3 class="text-lg font-serif font-bold text-carlos-navy">資深員工不願配合新主管</h3>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6 pt-2 border-t border-cool-gray/60">
+                            <div>
+                                <span class="text-xs font-semibold text-steel-blue uppercase block mb-1">Problem｜難題現場</span>
+                                <p class="text-sm text-charcoal/80 leading-relaxed font-light">資深同仁資歷深、經驗豐富，對新做法抱持消極不配合的態度。</p>
+                            </div>
+                            <div>
+                                <span class="text-xs font-semibold text-olive-green uppercase block mb-1">Core Observation｜核心觀察</span>
+                                <p class="text-sm text-charcoal/80 leading-relaxed font-light">先理解對方在保護什麼（如安全感或既有專業權威），再處理合作問題。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 03 -->
+                    <div class="bg-white p-8 rounded-xl border border-cool-gray shadow-sm">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-xs font-bold text-white bg-carlos-navy px-2.5 py-1 rounded">CASE 03</span>
+                            <h3 class="text-lg font-serif font-bold text-carlos-navy">工作全部卡在主管身上</h3>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6 pt-2 border-t border-cool-gray/60">
+                            <div>
+                                <span class="text-xs font-semibold text-steel-blue uppercase block mb-1">Problem｜難題現場</span>
+                                <p class="text-sm text-charcoal/80 leading-relaxed font-light">主管看似最忙、每天加班審核，團隊卻沒有真正成長且缺乏自主性。</p>
+                            </div>
+                            <div>
+                                <span class="text-xs font-semibold text-olive-green uppercase block mb-1">Core Observation｜核心觀察</span>
+                                <p class="text-sm text-charcoal/80 leading-relaxed font-light">真正的交辦不是把工作分出去，而是逐步轉移責任與判斷能力。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Article Method / Scroll Story Section -->
+        <section class="py-24 bg-white border-b border-cool-gray">
+            <div class="max-w-3xl mx-auto px-6 md:px-12">
+                <div class="text-center mb-16 reveal">
+                    <span class="text-xs uppercase tracking-[0.18em] font-bold text-steel-blue block mb-3">ARTICLE METHODOLOGY</span>
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-carlos-navy">
+                        我們如何看懂一個管理問題？
+                    </h2>
+                </div>
+
+                <!-- Story Timeline -->
+                <div class="space-y-12 relative border-l-2 border-cool-gray pl-6 md:pl-8 ml-4 md:ml-0">
+                    
+                    <div class="relative reveal">
+                        <span class="absolute -left-[31px] md:-left-[39px] top-0 w-4 h-4 rounded-full bg-steel-blue border-4 border-white"></span>
+                        <span class="text-xs font-bold text-steel-blue uppercase tracking-wider block mb-1">01｜情境</span>
+                        <h3 class="text-lg font-serif font-bold text-carlos-navy mb-2">發生了什麼？</h3>
+                        <p class="text-sm text-charcoal/80 font-light leading-relaxed">客觀還原管理現場事實，去除情緒化的語言與預設立場。</p>
+                    </div>
+
+                    <div class="relative reveal">
+                        <span class="absolute -left-[31px] md:-left-[39px] top-0 w-4 h-4 rounded-full bg-steel-blue border-4 border-white"></span>
+                        <span class="text-xs font-bold text-steel-blue uppercase tracking-wider block mb-1">02｜拉扯</span>
+                        <h3 class="text-lg font-serif font-bold text-carlos-navy mb-2">新手主管在想什麼？</h3>
+                        <p class="text-sm text-charcoal/80 font-light leading-relaxed">同理主管內心的焦慮、困惑與在責任邊界上的兩難選擇。</p>
+                    </div>
+
+                    <div class="relative reveal">
+                        <span class="absolute -left-[31px] md:-left-[39px] top-0 w-4 h-4 rounded-full bg-steel-blue border-4 border-white"></span>
+                        <span class="text-xs font-bold text-steel-blue uppercase tracking-wider block mb-1">03｜觀察</span>
+                        <h3 class="text-lg font-serif font-bold text-carlos-navy mb-2">真正的問題是什麼？</h3>
+                        <p class="text-sm text-charcoal/80 font-light leading-relaxed">透視表象背後的組織機制、角色期待或溝通認知落差。</p>
+                    </div>
+
+                    <div class="relative reveal">
+                        <span class="absolute -left-[31px] md:-left-[39px] top-0 w-4 h-4 rounded-full bg-steel-blue border-4 border-white"></span>
+                        <span class="text-xs font-bold text-steel-blue uppercase tracking-wider block mb-1">04｜轉折</span>
+                        <h3 class="text-lg font-serif font-bold text-carlos-navy mb-2">主管需要重新理解什麼？</h3>
+                        <p class="text-sm text-charcoal/80 font-light leading-relaxed">換個角度看角色與關係，重新定義勝任與成功的標準。</p>
+                    </div>
+
+                    <div class="relative reveal">
+                        <span class="absolute -left-[31px] md:-left-[39px] top-0 w-4 h-4 rounded-full bg-steel-blue border-4 border-white"></span>
+                        <span class="text-xs font-bold text-steel-blue uppercase tracking-wider block mb-1">05｜行動</span>
+                        <h3 class="text-lg font-serif font-bold text-carlos-navy mb-2">下一步可以怎麼做？</h3>
+                        <p class="text-sm text-charcoal/80 font-light leading-relaxed">提供具體、可落地的對話模板、行動步驟與溝通架構。</p>
+                    </div>
+
+                    <div class="relative reveal">
+                        <span class="absolute -left-[31px] md:-left-[39px] top-0 w-4 h-4 rounded-full bg-carlos-navy border-4 border-white"></span>
+                        <span class="text-xs font-bold text-olive-green uppercase tracking-wider block mb-1">06｜反思</span>
+                        <h3 class="text-lg font-serif font-bold text-carlos-navy mb-2">如果是你，你會怎麼選？</h3>
+                        <p class="text-sm text-charcoal/80 font-light leading-relaxed">留下自我叩問的空間，讓每一次閱讀都化為管理現場的實踐。</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Subscribe Section -->
+        <section id="subscribe" class="py-24 bg-warm-white border-b border-cool-gray">
+            <div class="max-w-4xl mx-auto px-6 md:px-12 text-center">
+                <span class="text-xs uppercase tracking-[0.2em] font-bold text-steel-blue block mb-3">CARLOS MANAGEMENT LETTER</span>
+                <h2 class="text-2xl md:text-4xl font-serif font-bold text-carlos-navy mb-4">
+                    把管理問題想得更清楚一點。
+                </h2>
+                <p class="text-sm md:text-base text-charcoal/70 leading-relaxed font-light max-w-xl mx-auto mb-10">
+                    定期收到新手主管的管理現場觀察、真實情境拆解、判斷框架與實用管理工具資訊。
+                </p>
+
+                <!-- Newsletter Form Demo -->
+                <form id="newsletter-form" class="max-w-md mx-auto space-y-4">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input 
+                            type="email" 
+                            id="newsletter-email" 
+                            required 
+                            placeholder="請輸入你的 Email 信箱" 
+                            class="flex-1 px-4 py-3.5 bg-white border border-cool-gray rounded-md text-sm text-charcoal placeholder-charcoal/40 focus:outline-none focus:border-steel-blue transition-colors"
+                        >
+                        <button 
+                            type="submit" 
+                            class="px-6 py-3.5 bg-carlos-navy text-white text-sm font-medium rounded-md hover:bg-steel-blue transition-colors flex items-center justify-center gap-2 shrink-0"
+                        >
+                            <span>訂閱管理觀察</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <p id="newsletter-message" class="text-xs text-olive-green font-medium hidden text-left pl-1"></p>
+                </form>
+            </div>
+        </section>
+
+        <!-- Consultation CTA Section -->
+        <section id="consultation" class="py-28 bg-white border-b border-cool-gray">
+            <div class="max-w-4xl mx-auto px-6 md:px-12 text-center reveal">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-carlos-navy leading-tight mb-6">
+                    每一個管理難題背後，<br>都有一個需要被重新看懂的現場。
+                </h2>
+                <p class="text-base md:text-lg text-charcoal/70 leading-relaxed font-light max-w-2xl mx-auto mb-10">
+                    如果你正在面對主管角色轉換、團隊管理、人才培育或企業主管訓練需求，可以從一次對話開始。
+                </p>
+                <div>
+                    <a href="https://calendar.app.google/J85Lxbxq5Jn2em9z7" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-10 py-5 bg-carlos-navy text-white text-base font-semibold rounded-md hover:bg-steel-blue transition-all duration-300 shadow-md group">
+                        <span>預約管理諮詢</span>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-olive-green group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-carlos-navy text-white py-16">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 border-b border-white/10 pb-12">
+                
+                <!-- Brand Line -->
+                <div class="md:col-span-6 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-9 flex items-center justify-center">
+                            <img src="logo.png" alt="卡洛斯管理顧問 LOGO" class="w-full h-full object-contain brightness-0 invert" onerror="this.onerror=null; this.src='https://placehold.co/80x90/FFFFFF/0F1E3A?text=CARLOS';">
+                        </div>
+                        <span class="font-serif font-bold text-xl text-white">卡洛斯</span>
+                    </div>
+                    <p class="text-xs uppercase tracking-[0.15em] text-white/60 font-medium">CARLOS MANAGEMENT CONSULTING</p>
+                    <p class="text-sm font-serif text-olive-green pt-1">卡洛斯｜新手主管的實戰觀察</p>
+                    <p class="text-xs text-white/70 font-light pt-2 max-w-md">
+                        冷靜地看懂管理現場，陪新手主管站穩第一步。
+                    </p>
+                </div>
+
+                <!-- Footer Navigation -->
+                <div class="md:col-span-6 flex flex-wrap gap-x-8 gap-y-3 items-start justify-start md:justify-end text-xs text-white/80 font-medium pt-2">
+                    <a href="#about" class="hover:text-white transition-colors">About</a>
+                    <a href="#method" class="hover:text-white transition-colors">Method</a>
+                    <a href="#services" class="hover:text-white transition-colors">Services</a>
+                    <a href="#insights" class="hover:text-white transition-colors">Insights</a>
+                    <a href="#cases" class="hover:text-white transition-colors">Cases</a>
+                    <a href="#subscribe" class="hover:text-white transition-colors">Subscribe</a>
+                    <a href="#consultation" class="hover:text-white transition-colors">Consultation</a>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/50 font-light gap-4">
+                <p>© 2026 Carlos Management Consulting. All Rights Reserved.</p>
+                <button id="back-to-top" class="hover:text-white transition-colors flex items-center gap-1.5 focus:outline-none">
+                    <span>回到頁首</span>
+                    <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Architecture -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide Icons
+            lucide.createIcons();
+
+            // Initialize all core functional modules
+            initMobileMenu();
+            initSmoothScroll();
+            initTypewriter();
+            initScrollReveal();
+            initNewsletterForm();
+            initBackToTop();
+        });
+
+        /**
+         * Mobile Menu Toggle Handling
+         */
+        function initMobileMenu() {
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const iconOpen = document.getElementById('menu-icon-open');
+            const iconClose = document.getElementById('menu-icon-close');
+            const navLinks = document.querySelectorAll('.mobile-nav-link');
+
+            if (!menuBtn || !menu) return;
+
+            menuBtn.addEventListener('click', function() {
+                const isOpen = menu.classList.contains('hidden');
+                if (isOpen) {
+                    menu.classList.remove('hidden');
+                    iconOpen.classList.add('hidden');
+                    iconClose.classList.remove('hidden');
+                    menuBtn.setAttribute('aria-expanded', 'true');
+                } else {
+                    menu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                    menuBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // Close menu upon clicking navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    menu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                    menuBtn.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
+
+        /**
+         * Smooth Scroll for Inner Links
+         */
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        /**
+         * Thinking Typewriter Animation Stage Controller
+         */
+        function initTypewriter() {
+            const textToType = "把新手主管沒人教、也不好問的問題，慢慢講清楚。";
+            const targetElement = document.getElementById('typewriter-text');
+            const caretElement = document.getElementById('typewriter-caret');
+            
+            const markElement = document.getElementById('hero-mark');
+            const eyebrowElement = document.getElementById('hero-eyebrow');
+            const supportingElement = document.getElementById('hero-supporting');
+            const ctaElement = document.getElementById('hero-cta');
+
+            if (!targetElement) return;
+
+            // Check prefers-reduced-motion
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (prefersReducedMotion) {
+                // Show content instantly for accessibility
+                if (markElement) markElement.style.opacity = '1';
+                if (eyebrowElement) eyebrowElement.style.opacity = '1';
+                targetElement.textContent = textToType;
+                if (supportingElement) {
+                    supportingElement.style.opacity = '1';
+                    supportingElement.style.transform = 'translateY(0)';
+                }
+                if (ctaElement) {
+                    ctaElement.style.opacity = '1';
+                    ctaElement.style.transform = 'translateY(0)';
+                }
+                return;
+            }
+
+            // Stage 01: Brand Mark Fade In
+            setTimeout(() => {
+                if (markElement) markElement.style.opacity = '1';
+            }, 200);
+
+            // Stage 02: Brand Eyebrow Fade In
+            setTimeout(() => {
+                if (eyebrowElement) eyebrowElement.style.opacity = '1';
+            }, 600);
+
+            // Stage 03: H1 Typewriter Typing (50-80ms per char)
+            setTimeout(() => {
+                if (caretElement) caretElement.classList.remove('hidden');
+                let charIndex = 0;
+                
+                const typingInterval = setInterval(() => {
+                    if (charIndex < textToType.length) {
+                        targetElement.textContent += textToType.charAt(charIndex);
+                        charIndex++;
+                    } else {
+                        clearInterval(typingInterval);
+                        
+                        // Hide caret after typing finishes
+                        setTimeout(() => {
+                            if (caretElement) caretElement.classList.add('hidden');
+                        }, 1200);
+
+                        // Stage 04: Supporting text Reveal
+                        setTimeout(() => {
+                            if (supportingElement) {
+                                supportingElement.style.opacity = '1';
+                                supportingElement.style.transform = 'translateY(0)';
+                            }
+                        }, 300);
+
+                        // Stage 05: CTAs Reveal
+                        setTimeout(() => {
+                            if (ctaElement) {
+                                ctaElement.style.opacity = '1';
+                                ctaElement.style.transform = 'translateY(0)';
+                            }
+                        }, 700);
+                    }
+                }, 65);
+            }, 1000);
+        }
+
+        /**
+         * Scroll Reveal with IntersectionObserver
+         */
+        function initScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                // Fallback for older browsers
+                reveals.forEach(el => el.classList.add('active'));
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            reveals.forEach(el => observer.observe(el));
+        }
+
+        /**
+         * Newsletter Form Submission Handler (Front-end Demo)
+         */
+        function initNewsletterForm() {
+            const form = document.getElementById('newsletter-form');
+            const message = document.getElementById('newsletter-message');
+
+            if (!form || !message) return;
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailInput = document.getElementById('newsletter-email');
+                if (emailInput && emailInput.value) {
+                    message.textContent = "感謝你的訂閱，正式串接電子報系統後即可啟用。";
+                    message.classList.remove('hidden');
+                    emailInput.value = '';
+                }
+            });
+        }
+
+        /**
+         * Back to Top Smooth Scroll
+         */
+        function initBackToTop() {
+            const backBtn = document.getElementById('back-to-top');
+            if (!backBtn) return;
+
+            backBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    </script>
+</body>
+</html>

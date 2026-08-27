@@ -110,11 +110,59 @@
       position: relative;
       overflow: hidden;
       isolation: isolate;
-      background:
-        linear-gradient(rgba(15,30,58,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(15,30,58,.035) 1px, transparent 1px),
-        #fff;
-      background-size: 72px 72px;
+      background: #101923;
+    }
+
+    .hero-video,
+    .hero-video-overlay {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-video {
+      z-index: -3;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hero-video iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 177.78vh;
+      min-width: 100%;
+      height: 56.25vw;
+      min-height: 100%;
+      border: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    .hero-video-overlay {
+      z-index: -2;
+      background: linear-gradient(90deg, rgba(7, 16, 26, .9) 0%, rgba(7, 16, 26, .66) 48%, rgba(7, 16, 26, .32) 100%);
+    }
+
+    .hero-intelligence > .editorial-container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-intelligence .eyebrow,
+    .hero-intelligence .hero-title,
+    .hero-intelligence .hero-support-stage p {
+      color: #fff;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, .28);
+    }
+
+    .hero-intelligence .hero-support-stage {
+      border-color: rgba(190, 201, 109, .9);
+    }
+
+    .hero-intelligence .body-copy {
+      color: rgba(255, 255, 255, .88);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, .3);
     }
 
     .hero-intelligence::before {
@@ -356,61 +404,6 @@
     .btn-secondary:hover .btn-arrow { color: var(--olive-green); transform: translateX(4px); }
     .btn-arrow { transition: transform .3s var(--ease-carlos), color .3s var(--ease-carlos); }
 
-    .contact-field {
-      width: 100%;
-      min-height: 48px;
-      border: 1px solid var(--cool-gray);
-      border-radius: 10px;
-      background: #fff;
-      padding: .75rem 1rem;
-      color: var(--charcoal);
-      font-size: 1rem;
-      transition: border-color .25s ease, box-shadow .25s ease;
-    }
-
-    .contact-field:focus {
-      border-color: var(--steel-blue);
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(62, 92, 128, .12);
-    }
-
-    textarea.contact-field {
-      min-height: 140px;
-      resize: vertical;
-    }
-
-    .contact-submit-frame {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      border: 0;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .contact-modal[hidden] { display: none; }
-
-    .contact-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      display: grid;
-      place-items: center;
-      padding: 1.25rem;
-      background: rgba(15, 30, 58, .46);
-      backdrop-filter: blur(5px);
-    }
-
-    .contact-modal-panel {
-      width: min(100%, 460px);
-      border-top: 4px solid var(--olive-green);
-      border-radius: 14px;
-      background: #fff;
-      padding: 2rem;
-      box-shadow: 0 24px 80px rgba(15, 30, 58, .22);
-      text-align: center;
-    }
-
     .nav-link {
       position: relative;
       min-height: 44px;
@@ -546,8 +539,10 @@
         height: auto;
       }
       .framework-number { margin-inline: 0; }
-      .hero-intelligence { background-size: 48px 48px; }
       .hero-title { font-size: clamp(2.7rem, 12vw, 4.2rem); }
+      .hero-video-overlay {
+        background: linear-gradient(180deg, rgba(7, 16, 26, .78) 0%, rgba(7, 16, 26, .7) 100%);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -566,6 +561,7 @@
         transform: none !important;
       }
       .type-cursor { display: none !important; }
+      .hero-video { display: none; }
     }
   </style>
 </head>
@@ -621,6 +617,15 @@
   <main id="main-content">
     <!-- Hero -->
     <section id="home" class="hero-intelligence flex min-h-screen items-center pt-24" aria-labelledby="hero-title">
+      <div class="hero-video" aria-hidden="true">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/i-gmUH_d_8w?autoplay=1&mute=1&loop=1&playlist=i-gmUH_d_8w&controls=0&playsinline=1&rel=0&modestbranding=1&disablekb=1"
+          title="卡洛斯實戰管理顧問背景影片"
+          allow="autoplay; encrypted-media"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+      <div class="hero-video-overlay" aria-hidden="true"></div>
       <div class="editorial-container grid items-center gap-14 py-16 lg:grid-cols-12 lg:py-24 xl:gap-20">
         <div class="lg:col-span-7 xl:col-span-7">
           <div class="hero-brand-stage mb-7">
@@ -1112,86 +1117,22 @@
       </div>
     </section>
 
-    <!-- Contact -->
+    <!-- Consultation CTA -->
     <section id="consultation" class="section-pad scroll-mt-24 bg-white" aria-labelledby="consultation-title">
-      <div class="editorial-container grid gap-12 lg:grid-cols-12 lg:gap-20">
-        <div class="reveal lg:col-span-5">
-          <p class="eyebrow">與我們取得聯繫</p>
+      <div class="editorial-container">
+        <div class="reveal mx-auto max-w-5xl text-center">
+          <p class="eyebrow">管理諮詢</p>
           <h2 id="consultation-title" class="mt-6 font-serif text-[clamp(2.3rem,5vw,5rem)] font-semibold leading-[1.18] tracking-[-0.04em] text-carlos-navy">
-            讓我們一起，<br />把管理現場看清楚。
+            每一個管理難題背後，<br />都有一個需要被重新看懂的現場。
           </h2>
-          <p class="mt-8 max-w-xl body-copy text-charcoal/68">如果你正在面對主管角色轉換、團隊管理、人才培育或企業主管訓練需求，歡迎留下訊息，從一次對話開始。</p>
-          <div class="mt-10 border-t border-cool-gray pt-6">
-            <p class="text-sm font-semibold text-steel-blue">聯絡信箱</p>
-            <a href="mailto:carlos.newmanager@gmail.com" class="mt-2 inline-block break-all font-inter text-lg font-semibold text-carlos-navy hover:text-steel-blue">carlos.newmanager@gmail.com</a>
+          <p class="mx-auto mt-8 max-w-2xl body-copy text-charcoal/68">如果你正在面對主管角色轉換、團隊管理、人才培育或企業主管訓練需求，可以從一次對話開始。</p>
+          <div class="mt-10">
+            <a href="https://calendar.app.google/J85Lxbxq5Jn2em9z7" target="_blank" rel="noopener noreferrer" class="btn-primary">預約管理諮詢 <span class="btn-arrow" aria-hidden="true">↗</span></a>
           </div>
-        </div>
-
-        <div class="reveal lg:col-span-7" style="--delay: 100ms;">
-          <form id="contact-form" class="border-t border-cool-gray pt-7" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSckUlvqSsGzEbnbHpucTrCoHUJRM02_iE1AlnDbajsYdJWlcw/formResponse" method="post" target="contact-submit-frame" novalidate>
-            <div class="grid gap-6 sm:grid-cols-2">
-              <div>
-                <label for="contact-name" class="text-sm font-semibold text-carlos-navy">您的姓名／稱呼 <span class="text-olive-green" aria-hidden="true">*</span></label>
-                <input id="contact-name" name="name" type="text" autocomplete="name" required class="contact-field mt-3" placeholder="請輸入姓名或稱呼" />
-              </div>
-              <div>
-                <label for="contact-email" class="text-sm font-semibold text-carlos-navy">聯絡電子信箱 <span class="text-olive-green" aria-hidden="true">*</span></label>
-                <input id="contact-email" name="email" type="email" autocomplete="email" required class="contact-field mt-3" placeholder="name@example.com" />
-              </div>
-              <div>
-                <label for="contact-company" class="text-sm font-semibold text-carlos-navy">公司／單位</label>
-                <input id="contact-company" name="company" type="text" autocomplete="organization" class="contact-field mt-3" placeholder="請輸入公司或單位名稱（選填）" />
-              </div>
-            </div>
-
-            <div class="mt-6">
-              <label for="contact-need" class="text-sm font-semibold text-carlos-navy">您的需求 <span class="text-olive-green" aria-hidden="true">*</span></label>
-              <select id="contact-need" name="need" required class="contact-field mt-3">
-                <option value="" selected disabled>請選擇需求類型</option>
-                <option value="企業內訓">企業內訓</option>
-                <option value="卡洛斯 新手主管訂閱計畫">卡洛斯 新手主管訂閱計畫</option>
-                <option value="主管工作坊／主題講座">主管工作坊／主題講座</option>
-                <option value="管理顧問與諮詢">管理顧問與諮詢</option>
-                <option value="其他">其他</option>
-              </select>
-            </div>
-
-            <div class="mt-6">
-              <label for="contact-details" class="text-sm font-semibold text-carlos-navy">需求簡介 <span class="text-olive-green" aria-hidden="true">*</span></label>
-              <textarea id="contact-details" name="details" required class="contact-field mt-3" placeholder="請詳細描述您的需求、目前情況或想討論的問題"></textarea>
-            </div>
-
-            <div class="mt-6">
-              <label for="contact-time" class="text-sm font-semibold text-carlos-navy">適合聯絡的時間 <span class="text-olive-green" aria-hidden="true">*</span></label>
-              <select id="contact-time" name="time" required class="contact-field mt-3">
-                <option value="" selected disabled>請選擇方便聯絡的時段</option>
-                <option value="平日早上 09:00–12:00">平日早上 09:00–12:00</option>
-                <option value="平日下午 13:00–17:00">平日下午 13:00–17:00</option>
-                <option value="平日晚上 18:00–21:00">平日晚上 18:00–21:00</option>
-                <option value="週末白天">週末白天</option>
-                <option value="請先以 Email 聯絡">請先以 Email 聯絡</option>
-              </select>
-            </div>
-
-            <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <p id="contact-message" class="min-h-6 text-sm text-steel-blue" aria-live="polite"></p>
-              <button type="submit" class="btn-primary shrink-0">送出聯絡資訊 <span class="btn-arrow" aria-hidden="true">→</span></button>
-            </div>
-          </form>
         </div>
       </div>
     </section>
   </main>
-
-  <iframe name="contact-submit-frame" id="contact-submit-frame" class="contact-submit-frame" title="聯絡表單送出處理區" aria-hidden="true"></iframe>
-
-  <div id="contact-success-modal" class="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-success-title" hidden>
-    <div class="contact-modal-panel">
-      <p class="eyebrow">訊息已收到</p>
-      <h2 id="contact-success-title" class="mt-4 font-serif text-3xl font-semibold text-carlos-navy">需求已送出，我們將盡快與您聯絡！</h2>
-      <button id="contact-success-close" type="button" class="btn-primary mt-7">關閉提示</button>
-    </div>
-  </div>
 
   <!-- Footer -->
   <footer class="bg-carlos-navy text-white">
@@ -1394,74 +1335,6 @@
         });
       }
 
-      function initContactForm() {
-        const form = document.getElementById('contact-form');
-        const message = document.getElementById('contact-message');
-        const modal = document.getElementById('contact-success-modal');
-        const closeModal = document.getElementById('contact-success-close');
-        if (!form || !message || !modal || !closeModal) return;
-
-        const hideModal = () => {
-          modal.hidden = true;
-        };
-
-        closeModal.addEventListener('click', hideModal);
-        modal.addEventListener('click', event => {
-          if (event.target === modal) hideModal();
-        });
-        document.addEventListener('keydown', event => {
-          if (event.key === 'Escape' && !modal.hidden) hideModal();
-        });
-
-        form.addEventListener('submit', event => {
-          event.preventDefault();
-          const fields = [...form.querySelectorAll('input, select, textarea')];
-          const invalidField = fields.find(field => !field.checkValidity());
-
-          if (invalidField) {
-            message.textContent = '請完整填寫必填欄位，並確認 Email 格式正確。';
-            message.classList.remove('text-olive-green');
-            message.classList.add('text-steel-blue');
-            invalidField.focus();
-            return;
-          }
-
-          const fieldsToSubmit = {
-            name: 'entry.588998168',
-            company: 'entry.781073574',
-            email: 'entry.476214014',
-            requirement: 'entry.1610329698',
-            contactTime: 'entry.1091995575'
-          };
-          const submitData = new FormData();
-          submitData.append(fieldsToSubmit.name, document.getElementById('contact-name').value.trim());
-          submitData.append(fieldsToSubmit.company, document.getElementById('contact-company').value.trim());
-          submitData.append(fieldsToSubmit.email, document.getElementById('contact-email').value.trim());
-          submitData.append(fieldsToSubmit.requirement, `${document.getElementById('contact-need').value}\n需求簡介：${document.getElementById('contact-details').value.trim()}`);
-          submitData.append(fieldsToSubmit.contactTime, document.getElementById('contact-time').value);
-
-          const submitForm = document.createElement('form');
-          submitForm.action = form.action;
-          submitForm.method = 'post';
-          submitForm.target = 'contact-submit-frame';
-          submitData.forEach((value, key) => {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = key;
-            input.value = value;
-            submitForm.appendChild(input);
-          });
-          document.body.appendChild(submitForm);
-          submitForm.submit();
-          submitForm.remove();
-
-          form.reset();
-          message.textContent = '';
-          modal.hidden = false;
-          closeModal.focus();
-        });
-      }
-
       function initBackToTop() {
         const button = document.getElementById('back-to-top');
         if (!button) return;
@@ -1542,7 +1415,6 @@
         initScrollReveal();
         initActiveNavigation();
         initNewsletterForm();
-        initContactForm();
         initBackToTop();
         initFrameworkReveal();
         initDemoArticleButtons();

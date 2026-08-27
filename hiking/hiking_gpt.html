@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="森野步道｜登山健行行程推廣網站，包含行程介紹、特色、裝備建議與線上報名。" />
+  <title>森野步道｜登山健行行程</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest-950: #10251c;
+      --forest-900: #163226;
+      --forest-800: #214b38;
+      --forest-700: #2c6449;
+      --forest-600: #3a7d5a;
+      --sage-100: #eaf1eb;
+      --sand-50: #fbfaf7;
+      --sand-100: #f3efe6;
+      --sun: #f2b84b;
+      --text: #1d2a22;
+      --muted: #6e786f;
+      --white: #fff;
+      --shadow: 0 18px 50px rgba(21, 48, 35, .12);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --container: min(1140px, calc(100% - 40px));
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--sand-50);
+      line-height: 1.75;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+
+    .container { width: var(--container); margin: 0 auto; }
+    .section { padding: 96px 0; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .84rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      color: var(--forest-700);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 2px;
+      border-radius: 99px;
+      background: var(--sun);
+    }
+    .section-title {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.15;
+      letter-spacing: -.035em;
+      color: var(--forest-950);
+    }
+    .section-lead {
+      max-width: 680px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      transition: .3s ease;
+      color: var(--white);
+    }
+    .nav.scrolled {
+      background: rgba(16, 37, 28, .91);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 30px rgba(0,0,0,.12);
+    }
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      font-size: 1.1rem;
+    }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+    }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-size: .95rem; font-weight: 600; opacity: .92; }
+    .nav-links a:hover { opacity: 1; color: #ffe1a3; }
+    .nav-cta {
+      padding: 10px 18px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+    }
+    .menu-btn {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 12px;
+      background: rgba(255,255,255,.1);
+      color: #fff;
+      cursor: pointer;
+      font-size: 1.35rem;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      align-items: end;
+      position: relative;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        linear-gradient(180deg, rgba(10, 22, 16, .08) 0%, rgba(10, 22, 16, .2) 42%, rgba(10, 22, 16, .82) 100%),
+        url('https://images.unsplash.com/photo-1644347038516-d0b679a1fa9f?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000') center 56% / cover no-repeat;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 110px;
+      background: linear-gradient(to bottom, transparent, var(--sand-50));
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 160px 0 125px;
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      align-items: end;
+      gap: 60px;
+    }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 13px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 999px;
+      background: rgba(255,255,255,.11);
+      backdrop-filter: blur(8px);
+      font-size: .85rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(3rem, 8vw, 6.7rem);
+      line-height: .98;
+      letter-spacing: -.05em;
+      max-width: 780px;
+    }
+    .hero h1 span { color: #f6cf7e; }
+    .hero p {
+      max-width: 700px;
+      margin: 24px 0 0;
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      color: rgba(255,255,255,.86);
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
+    .btn {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--sun); color: #2d281d; box-shadow: 0 12px 28px rgba(242,184,75,.26); }
+    .btn-ghost { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.3); color: #fff; backdrop-filter: blur(8px); }
+    .hero-card {
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: var(--radius-lg);
+      background: rgba(15, 37, 27, .44);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 24px 60px rgba(0,0,0,.22);
+    }
+    .hero-card .label { font-size: .82rem; color: rgba(255,255,255,.7); }
+    .hero-card strong { display: block; font-size: 1.35rem; margin-top: 3px; }
+    .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+    .stat { padding-top: 15px; border-top: 1px solid rgba(255,255,255,.18); }
+    .stat b { display: block; font-size: 1.15rem; }
+    .stat span { font-size: .82rem; color: rgba(255,255,255,.65); }
+
+    /* Intro */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 70px;
+      align-items: center;
+    }
+    .photo-stack { position: relative; min-height: 530px; }
+    .photo-main, .photo-secondary {
+      position: absolute;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      background: var(--sage-100);
+    }
+    .photo-main { inset: 0 80px 70px 0; }
+    .photo-secondary { width: 46%; height: 48%; right: 0; bottom: 0; border: 8px solid var(--sand-50); }
+    .photo-main img, .photo-secondary img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-main img { object-position: 50% 50%; }
+    .photo-secondary img { object-position: 70% 50%; }
+    .floating-note {
+      position: absolute;
+      left: 24px;
+      bottom: 16px;
+      z-index: 3;
+      max-width: 220px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      font-size: .9rem;
+    }
+    .floating-note b { display: block; color: var(--forest-800); margin-bottom: 3px; }
+    .intro-points { display: grid; gap: 18px; margin-top: 28px; }
+    .intro-point { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
+    .point-icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: var(--sage-100); }
+    .intro-point h3 { margin: 1px 0 4px; font-size: 1rem; }
+    .intro-point p { margin: 0; color: var(--muted); font-size: .94rem; }
+
+    /* Itinerary */
+    .itinerary { background: var(--forest-950); color: var(--white); position: relative; overflow: hidden; }
+    .itinerary::before {
+      content: "";
+      position: absolute;
+      width: 440px;
+      height: 440px;
+      right: -160px;
+      top: -160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(242,184,75,.16), transparent 65%);
+    }
+    .itinerary .eyebrow { color: #b7d3c0; }
+    .itinerary .section-title { color: #fff; }
+    .itinerary .section-lead { color: rgba(255,255,255,.62); }
+    .timeline { margin-top: 54px; position: relative; }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 23px;
+      top: 20px;
+      bottom: 20px;
+      width: 1px;
+      background: rgba(255,255,255,.18);
+    }
+    .time-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: 48px 110px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 0 0 34px;
+    }
+    .time-dot {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--forest-800);
+      border: 1px solid rgba(255,255,255,.22);
+      z-index: 2;
+      color: #f6cf7e;
+      font-size: 1rem;
+    }
+    .time { padding-top: 11px; color: #f6cf7e; font-weight: 800; }
+    .time-content {
+      padding: 20px 22px;
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,.055);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .time-content h3 { margin: 0 0 6px; font-size: 1.08rem; }
+    .time-content p { margin: 0; color: rgba(255,255,255,.6); font-size: .94rem; }
+
+    /* Features */
+    .feature-grid { margin-top: 48px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .feature-card {
+      padding: 28px 24px;
+      border-radius: var(--radius-md);
+      background: var(--white);
+      border: 1px solid #e6e9e5;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .feature-icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 14px; background: var(--sage-100); font-size: 1.35rem; }
+    .feature-card h3 { margin: 20px 0 8px; font-size: 1.05rem; }
+    .feature-card p { margin: 0; color: var(--muted); font-size: .92rem; }
+
+    /* Gear */
+    .gear { background: var(--sand-100); }
+    .gear-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: start; }
+    .gear-sticky { position: sticky; top: 110px; }
+    .gear-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .gear-item { padding: 22px; background: var(--white); border-radius: var(--radius-md); box-shadow: 0 8px 30px rgba(42,58,48,.06); }
+    .gear-item-top { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+    .gear-item h3 { margin: 0; font-size: 1rem; }
+    .gear-item .tag { font-size: .75rem; font-weight: 700; color: var(--forest-700); background: var(--sage-100); padding: 5px 8px; border-radius: 999px; }
+    .gear-item p { margin: 10px 0 0; color: var(--muted); font-size: .9rem; }
+    .gear-tip { margin-top: 26px; padding: 18px 20px; border-left: 4px solid var(--sun); background: #fff9ea; border-radius: 0 14px 14px 0; color: #635838; font-size: .9rem; }
+
+    /* Registration */
+    .register-wrap {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      overflow: hidden;
+      border-radius: 32px;
+      background: var(--forest-900);
+      box-shadow: var(--shadow);
+    }
+    .register-info {
+      padding: 52px;
+      color: #fff;
+      background:
+        linear-gradient(rgba(16,37,28,.72), rgba(16,37,28,.92)),
+        url('https://images.unsplash.com/photo-1786263652688-f7d6abd9c464?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000') center / cover;
+    }
+    .register-info .section-title { color: #fff; font-size: clamp(2.1rem, 4vw, 3.2rem); }
+    .register-info p { color: rgba(255,255,255,.72); }
+    .quick-info { display: grid; gap: 14px; margin-top: 34px; }
+    .quick-row { display: flex; gap: 12px; align-items: center; font-size: .94rem; }
+    .quick-row span:first-child { width: 36px; height: 36px; display: grid; place-items: center; background: rgba(255,255,255,.1); border-radius: 10px; }
+    .register-form { padding: 48px 52px; background: var(--white); }
+    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .field { display: grid; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    label { font-size: .88rem; font-weight: 700; color: #344239; }
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #dbe0dc;
+      border-radius: 12px;
+      background: #fbfcfb;
+      color: var(--text);
+      padding: 13px 14px;
+      outline: none;
+      transition: border .2s, box-shadow .2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--forest-600); box-shadow: 0 0 0 4px rgba(58,125,90,.10); }
+    textarea { min-height: 110px; resize: vertical; }
+    .consent { display: flex; gap: 10px; align-items: flex-start; margin: 18px 0; color: var(--muted); font-size: .84rem; }
+    .consent input { width: 18px; height: 18px; margin-top: 4px; }
+    .submit { width: 100%; border: none; }
+    .form-status { display: none; margin-top: 14px; padding: 12px 14px; border-radius: 10px; background: var(--sage-100); color: var(--forest-800); font-size: .9rem; }
+
+    footer { padding: 38px 0; background: #0b1913; color: rgba(255,255,255,.58); font-size: .84rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 30px; align-items: center; flex-wrap: wrap; }
+    .footer-credit a { text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      :root { --container: min(100% - 32px, 900px); }
+      .hero-content { grid-template-columns: 1fr; gap: 28px; padding-bottom: 110px; }
+      .hero-card { max-width: 560px; }
+      .intro-grid, .gear-grid, .register-wrap { grid-template-columns: 1fr; }
+      .photo-stack { min-height: 480px; }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+      .gear-sticky { position: static; }
+      .register-info { min-height: 430px; }
+    }
+
+    @media (max-width: 760px) {
+      .section { padding: 72px 0; }
+      .menu-btn { display: grid; place-items: center; }
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        left: 16px;
+        right: 16px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding: 14px;
+        border-radius: 18px;
+        background: rgba(16,37,28,.97);
+        box-shadow: var(--shadow);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 14px; }
+      .nav-cta { text-align: center; }
+      .hero { min-height: 100svh; }
+      .hero-content { padding-top: 130px; }
+      .hero-card { padding: 22px; }
+      .photo-stack { min-height: 420px; }
+      .photo-main { inset: 0 44px 60px 0; }
+      .photo-secondary { width: 52%; height: 44%; }
+      .floating-note { left: 12px; bottom: 8px; }
+      .time-row { grid-template-columns: 48px 1fr; gap: 14px; }
+      .time { grid-column: 2; padding: 0; margin-bottom: -12px; }
+      .time-content { grid-column: 2; }
+      .feature-grid, .gear-list, .form-grid { grid-template-columns: 1fr; }
+      .register-info, .register-form { padding: 34px 24px; }
+    }
+
+    @media (max-width: 520px) {
+      :root { --container: calc(100% - 24px); }
+      .hero h1 { font-size: clamp(3rem, 17vw, 4.7rem); }
+      .hero-actions .btn { width: 100%; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .photo-stack { min-height: 360px; }
+      .photo-main { inset: 0 20px 60px 0; }
+      .photo-secondary { width: 56%; height: 42%; }
+      .feature-grid { gap: 12px; }
+      .register-wrap { border-radius: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="森野步道首頁">
+        <span class="brand-mark">△</span>
+        <span>森野步道</span>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="開啟選單" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="主選單">
+        <a href="#about">行程介紹</a>
+        <a href="#itinerary">行程表</a>
+        <a href="#features">特色</a>
+        <a href="#gear">裝備建議</a>
+        <a class="nav-cta" href="#register">立即報名</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="登山健行主視覺">
+      <div class="container hero-content">
+        <div>
+          <div class="hero-kicker">🌲 週末限定・小團健行</div>
+          <h1>走進山裡，<br><span>把日常留在山下。</span></h1>
+          <p>一日山林健行體驗，沿著稜線穿越森林、遠眺群峰，在專業領隊陪同下，用剛剛好的步調重新感受呼吸與風景。</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#register">立即預約名額 →</a>
+            <a class="btn btn-ghost" href="#itinerary">查看完整行程</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="本梯活動摘要">
+          <span class="label">NEXT TRIP / 下一梯</span>
+          <strong>高山森林一日健行</strong>
+          <div class="stats">
+            <div class="stat"><b>7.8 KM</b><span>健行距離</span></div>
+            <div class="stat"><b>6 HRS</b><span>活動時間</span></div>
+            <div class="stat"><b>★★☆☆☆</b><span>入門難度</span></div>
+            <div class="stat"><b>12 人</b><span>小團上限</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container intro-grid">
+        <div class="photo-stack" aria-label="山林健行圖片">
+          <figure class="photo-main">
+            <img src="https://images.unsplash.com/photo-1644347038516-d0b679a1fa9f?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000" alt="健行者沿著山林步道前進" loading="lazy" />
+          </figure>
+          <figure class="photo-secondary">
+            <img src="https://images.unsplash.com/photo-1786263652688-f7d6abd9c464?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000" alt="層疊山景與森林" loading="lazy" />
+          </figure>
+          <div class="floating-note"><b>適合第一次參加團體健行</b>領隊控速、定點休息，保留欣賞風景的餘裕。</div>
+        </div>
+
+        <div>
+          <div class="eyebrow">About the trip</div>
+          <h2 class="section-title">不是趕路，<br>是去山裡生活一天。</h2>
+          <p class="section-lead">這趟行程設計給想親近山林、卻不想一開始就挑戰高難度路線的你。由集合、暖身、步行到回程，每一段都有清楚節奏與安全提醒。</p>
+          <div class="intro-points">
+            <div class="intro-point">
+              <div class="point-icon">🥾</div>
+              <div><h3>友善入門路線</h3><p>以緩上坡、森林步道與稜線視野為主，保有登山感但不過度消耗。</p></div>
+            </div>
+            <div class="intro-point">
+              <div class="point-icon">🧭</div>
+              <div><h3>專業帶隊與風險管理</h3><p>出發前確認天候、裝備與隊員狀況，途中依團隊節奏調整行進速度。</p></div>
+            </div>
+            <div class="intro-point">
+              <div class="point-icon">📷</div>
+              <div><h3>留給風景的時間</h3><p>安排觀景與拍照停留點，不追求速度，讓第一次健行也能享受過程。</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section itinerary" id="itinerary">
+      <div class="container">
+        <div class="eyebrow">One-day itinerary</div>
+        <h2 class="section-title">一日健行行程</h2>
+        <p class="section-lead">實際時間可能依天候、路況與隊伍狀態彈性調整，安全與體驗品質優先。</p>
+
+        <div class="timeline">
+          <div class="time-row">
+            <div class="time-dot">01</div><div class="time">07:30</div>
+            <div class="time-content"><h3>集合・裝備確認</h3><p>集合點報到、領隊自我介紹、行前說明與基本暖身，確認飲水與個人裝備。</p></div>
+          </div>
+          <div class="time-row">
+            <div class="time-dot">02</div><div class="time">08:10</div>
+            <div class="time-content"><h3>進入森林步道</h3><p>從林蔭緩坡開始，建立步行節奏，沿途介紹步道環境與基礎登山技巧。</p></div>
+          </div>
+          <div class="time-row">
+            <div class="time-dot">03</div><div class="time">10:30</div>
+            <div class="time-content"><h3>稜線展望・景觀休息</h3><p>抵達主要觀景點，享用行動糧、補充水分，拍照與欣賞群峰景色。</p></div>
+          </div>
+          <div class="time-row">
+            <div class="time-dot">04</div><div class="time">12:00</div>
+            <div class="time-content"><h3>山上午餐</h3><p>選擇安全寬敞處休息用餐，領隊進行簡單環境教育與無痕山林提醒。</p></div>
+          </div>
+          <div class="time-row">
+            <div class="time-dot">05</div><div class="time">14:30</div>
+            <div class="time-content"><h3>下山・返回集合點</h3><p>依體力狀況調整休息頻率，回到登山口後進行伸展、點名與活動收尾。</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <div class="eyebrow">Why join us</div>
+        <h2 class="section-title">四個理由，放心把週末交給山。</h2>
+        <p class="section-lead">從行程節奏到人數控制，我們把「看得到風景」和「走得舒服」放在同一件事裡。</p>
+        <div class="feature-grid">
+          <article class="feature-card"><div class="feature-icon">👥</div><h3>12 人小團制</h3><p>維持帶隊品質與互動空間，避免大團行進造成等待與壓力。</p></article>
+          <article class="feature-card"><div class="feature-icon">🛟</div><h3>安全優先</h3><p>行前天候評估、路線檢查與緊急應變機制，必要時調整或取消行程。</p></article>
+          <article class="feature-card"><div class="feature-icon">🌿</div><h3>無痕山林</h3><p>減少一次性用品、垃圾自行帶下山，尊重步道、植物與野生動物。</p></article>
+          <article class="feature-card"><div class="feature-icon">☕</div><h3>自在節奏</h3><p>保留休息與拍照時間，讓健行不只是完成里程，而是一段完整體驗。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section gear" id="gear">
+      <div class="container gear-grid">
+        <div class="gear-sticky">
+          <div class="eyebrow">Gear checklist</div>
+          <h2 class="section-title">帶對裝備，<br>山路會更好走。</h2>
+          <p class="section-lead">第一次參加不用買滿整套裝備，先把「鞋、衣、水、雨具」準備好，就是最重要的開始。</p>
+          <div class="gear-tip">💡 建議出發前一晚完成打包，並依活動前 24 小時天氣預報調整保暖與防雨用品。</div>
+        </div>
+
+        <div class="gear-list">
+          <article class="gear-item"><div class="gear-item-top"><h3>登山鞋 / 越野鞋</h3><span class="tag">必備</span></div><p>鞋底需具抓地力，避免穿全新、尚未磨合的鞋款直接上山。</p></article>
+          <article class="gear-item"><div class="gear-item-top"><h3>20–30L 背包</h3><span class="tag">建議</span></div><p>容量足夠放水、午餐、保暖層與雨具；有胸扣或腰帶更穩定。</p></article>
+          <article class="gear-item"><div class="gear-item-top"><h3>飲水 1.5–2L</h3><span class="tag">必備</span></div><p>依季節與個人需求調整，建議分裝以方便途中補水。</p></article>
+          <article class="gear-item"><div class="gear-item-top"><h3>兩截式雨衣</h3><span class="tag">必備</span></div><p>山區天氣變化快，雨衣同時也能提供一定程度的防風效果。</p></article>
+          <article class="gear-item"><div class="gear-item-top"><h3>洋蔥式穿著</h3><span class="tag">建議</span></div><p>排汗底層＋保暖層＋防風外層，依體感快速增減衣物。</p></article>
+          <article class="gear-item"><div class="gear-item-top"><h3>行動糧 / 午餐</h3><span class="tag">必備</span></div><p>準備好攜帶、低垃圾量且自己吃得習慣的食物。</p></article>
+          <article class="gear-item"><div class="gear-item-top"><h3>帽子與防曬</h3><span class="tag">建議</span></div><p>稜線曝曬明顯，建議搭配太陽眼鏡與可補擦的防曬用品。</p></article>
+          <article class="gear-item"><div class="gear-item-top"><h3>個人藥品</h3><span class="tag">必備</span></div><p>若有過敏、氣喘或固定用藥，請自行攜帶並於報名時告知領隊。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="register">
+      <div class="container">
+        <div class="register-wrap">
+          <div class="register-info">
+            <div class="eyebrow" style="color:#c6dbcD">Reservation</div>
+            <h2 class="section-title">下一個週末，<br>一起往山裡走。</h2>
+            <p>填寫資料後，我們會以 Email 或電話確認梯次與付款方式。本表單為網站示範，尚未串接後端資料庫。</p>
+            <div class="quick-info">
+              <div class="quick-row"><span>📅</span><span>每月 2–3 梯，週六／週日出發</span></div>
+              <div class="quick-row"><span>💰</span><span>NT$ 1,680 / 人（含帶隊與保險）</span></div>
+              <div class="quick-row"><span>👤</span><span>建議 15 歲以上，具基本步行體力</span></div>
+            </div>
+          </div>
+
+          <form class="register-form" id="signupForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="name">姓名 *</label>
+                <input id="name" name="name" type="text" placeholder="王小明" required />
+              </div>
+              <div class="field">
+                <label for="phone">聯絡電話 *</label>
+                <input id="phone" name="phone" type="tel" placeholder="0912-345-678" required />
+              </div>
+              <div class="field full">
+                <label for="email">Email *</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" required />
+              </div>
+              <div class="field">
+                <label for="date">希望梯次 *</label>
+                <select id="date" name="date" required>
+                  <option value="">請選擇</option>
+                  <option>9/12（六）森林稜線健行</option>
+                  <option>9/20（日）晨光山徑健行</option>
+                  <option>10/03（六）秋日山景健行</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="people">報名人數 *</label>
+                <select id="people" name="people" required>
+                  <option>1 人</option><option>2 人</option><option>3 人</option><option>4 人</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="experience">健行經驗</label>
+                <select id="experience" name="experience">
+                  <option>第一次參加健行</option>
+                  <option>偶爾郊山健行</option>
+                  <option>固定登山／健行</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="note">備註</label>
+                <textarea id="note" name="note" placeholder="例如：飲食需求、需特別留意的身體狀況或想詢問的問題"></textarea>
+              </div>
+            </div>
+            <label class="consent"><input type="checkbox" required /><span>我已閱讀行程說明，並同意主辦單位以本表單資料聯繫行程相關事宜。</span></label>
+            <button class="btn btn-primary submit" type="submit">送出報名資料 →</button>
+            <div class="form-status" id="formStatus">已收到你的資料！這是前端示範訊息；正式上線時可串接 Google Forms、Apps Script 或後端 API。</div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 森野步道 Mountain Hiking Experience. Demo landing page.</div>
+      <div class="footer-credit">Photo: <a href="https://unsplash.com/photos/a-man-hiking-up-a-trail-in-the-mountains-h53NKaL-Muw" target="_blank" rel="noreferrer">Kristian Ranstrom / Unsplash</a>・<a href="https://unsplash.com/photos/mountain-ridges-with-pine-branch-foreground-g_WWsCcBBX4" target="_blank" rel="noreferrer">Veronica Dudarev / Unsplash</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const form = document.getElementById('signupForm');
+    const formStatus = document.getElementById('formStatus');
+
+    function updateNav() {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }
+    updateNav();
+    window.addEventListener('scroll', updateNav, { passive: true });
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+      menuBtn.textContent = isOpen ? '✕' : '☰';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.textContent = '☰';
+      });
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      formStatus.style.display = 'block';
+      formStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      form.reset();
+    });
+  </script>
+</body>
+</html>
