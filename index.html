@@ -46,6 +46,12 @@
 
   <style>
     :root {
+      --carlos-navy: #0F1E3A;
+      --steel-blue: #3E5C80;
+      --olive-green: #8A8F3D;
+      --cool-gray: #E6E8EB;
+      --warm-white: #F8F8F5;
+      --ease-carlos: cubic-bezier(.22, 1, .36, 1);
       color: var(--carlos-navy);
     }
 
@@ -71,14 +77,78 @@
     }
 
     .section-pad {
-      padding-block: clamp(4.5rem, 9vw, 9.5rem);
+      padding-block: clamp(2rem, 3.5vw, 3.75rem);
+    }
+
+    .article-part {
+      overflow: hidden;
+      border: 1px solid var(--cool-gray);
+      border-radius: 1rem;
+      background: #fff;
+      box-shadow: 0 12px 40px rgba(15, 30, 58, 0.06);
+    }
+
+    .article-part summary {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      min-height: 88px;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .article-part summary::-webkit-details-marker { display: none; }
+
+    .article-part summary::after {
+      content: "+";
+      display: grid;
+      width: 2.5rem;
+      height: 2.5rem;
+      place-items: center;
+      border: 1px solid var(--cool-gray);
+      border-radius: 999px;
+      color: var(--carlos-navy);
+      font-size: 1.4rem;
+      transition: transform 180ms ease;
+    }
+
+    .article-part[open] summary::after { transform: rotate(45deg); }
+
+    .article-part-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 0 1.25rem 1.25rem;
+    }
+
+    .article-entry {
+      overflow: hidden;
+      border: 1px solid var(--cool-gray);
+      border-radius: 0.9rem;
+      background: var(--warm-white);
+    }
+
+    .article-entry img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .article-entry h3 {
+      padding: 1rem 1.1rem 1.2rem;
+      color: var(--carlos-navy);
+      font-family: "Noto Serif TC", serif;
+      font-size: 1.05rem;
+      line-height: 1.65;
     }
 
     .eyebrow {
       font-family: Inter, system-ui, sans-serif;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      font-size: 0.75rem;
+      font-size: 0.8125rem;
       font-weight: 700;
       color: var(--steel-blue);
     }
@@ -88,7 +158,7 @@
       font-weight: 600;
       letter-spacing: -0.035em;
       line-height: 1.13;
-      font-size: clamp(2rem, 4vw, 4rem);
+      font-size: clamp(1.9rem, 3vw, 3rem);
     }
 
     .hero-title {
@@ -97,7 +167,7 @@
       font-weight: 600;
       letter-spacing: -0.045em;
       line-height: 1.15;
-      font-size: clamp(3rem, 6vw, 5.75rem);
+      font-size: clamp(2.2rem, 3.25vw, 3.35rem);
       text-wrap: balance;
     }
 
@@ -158,6 +228,67 @@
       margin-inline: auto;
     }
 
+    .hero-brand-stack {
+      align-self: center;
+    }
+
+    .hero-brand-stack .hero-logo-wrap {
+      width: min(100%, 400px);
+    }
+
+    .hero-brand-stack .official-logo {
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .hero-journey {
+      width: min(100%, 440px);
+      margin: .85rem auto 0;
+    }
+
+    .hero-journey .journey-steps {
+      grid-template-columns: 1fr;
+      gap: .7rem;
+    }
+
+    .hero-journey .journey-step {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      min-height: 58px;
+      padding: .55rem .8rem;
+    }
+
+    .hero-journey .journey-step p {
+      margin-top: 0;
+      font-size: .78rem;
+      line-height: 1.5;
+    }
+
+    .hero-journey .journey-step br {
+      display: none;
+    }
+
+    .hero-journey .journey-step:not(:last-child)::after {
+      content: "\2193";
+      left: auto;
+      right: .8rem;
+      bottom: -.62rem;
+      top: auto;
+      transform: none;
+      font-size: .9rem;
+    }
+
+    @media (min-width: 1024px) {
+      #home {
+        min-height: 100vh;
+      }
+
+      .hero-brand-stack {
+        transform: translateY(-.75rem);
+      }
+    }
+
     .hero-logo-wrap::before {
       content: "";
       position: absolute;
@@ -196,23 +327,11 @@
     .js .brand-mark-stage,
     .js .hero-brand-stage,
     .js .hero-support-stage {
-      opacity: 0;
+      opacity: 1;
     }
 
     .js .brand-mark-stage {
-      transform: scale(.96);
-    }
-
-    .hero-ready .brand-mark-stage {
-      animation: brandMarkIn 1.2s var(--ease-carlos) forwards;
-    }
-
-    .hero-ready .hero-brand-stage {
-      animation: fadeUp .8s .55s var(--ease-carlos) forwards;
-    }
-
-    .hero-ready .hero-support-stage {
-      animation: fadeUp .9s 1.05s var(--ease-carlos) forwards;
+      transform: none;
     }
 
     @keyframes brandMarkIn {
@@ -442,6 +561,43 @@
       height: 1px;
     }
 
+    .journey-steps {
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    .journey-step {
+      position: relative;
+    }
+
+    .journey-step:not(:last-child)::after {
+      content: "\2193";
+      position: absolute;
+      left: 50%;
+      bottom: -2.1rem;
+      transform: translateX(-50%);
+      color: var(--olive-green);
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    @media (min-width: 1024px) {
+      .journey-steps {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2rem;
+      }
+
+      .journey-step:not(:last-child)::after {
+        content: "\2192";
+        left: auto;
+        right: -1.45rem;
+        bottom: auto;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
     .framework-track {
       position: relative;
     }
@@ -547,7 +703,7 @@
       }
       .framework-number { margin-inline: 0; }
       .hero-intelligence { background-size: 48px 48px; }
-      .hero-title { font-size: clamp(2.7rem, 12vw, 4.2rem); }
+      .hero-title { font-size: clamp(1.85rem, 7.5vw, 2.85rem); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -568,7 +724,6 @@
       .type-cursor { display: none !important; }
     }
   </style>
-  <link rel="stylesheet" href="assets/readability.css" />
 </head>
 
 <body class="bg-white text-charcoal">
@@ -581,17 +736,16 @@
   <header id="site-header" class="fixed inset-x-0 top-0 z-50 border-b border-transparent bg-white/90 backdrop-blur-md transition-all duration-300">
     <div class="editorial-container flex min-h-[76px] items-center justify-between gap-6">
       <a href="#home" class="flex min-h-[44px] items-center gap-3" aria-label="回到首頁">
-        <img src="assets/logo.webp" class="nav-logo" width="52" height="52" alt="卡洛斯 LOGO" />
-        <span class="brand-name">
+        <img src="mywork/LOGO-symbol.png" class="h-10 w-10 object-contain" alt="" aria-hidden="true" />
+        <span class="hidden sm:block">
           <span class="block text-sm font-semibold tracking-wide text-carlos-navy">卡洛斯實戰管理顧問</span>
         </span>
       </a>
 
-      <nav class="hidden items-center gap-5 lg:flex" aria-label="主要導覽">
+      <nav class="hidden items-center gap-7 lg:flex" aria-label="主要導覽">
         <a class="nav-link" href="#about">關於我們</a>
         <a class="nav-link" href="#services">服務項目</a>
-        <a class="nav-link" href="#core-products">實戰管理訂閱計畫</a>
-        <a class="nav-link" href="#consultation">管理諮詢</a>
+        <a class="nav-link" href="#consultation">服務諮詢</a>
       </nav>
 
       <button id="menu-toggle" class="grid min-h-[44px] min-w-[44px] place-items-center rounded-lg border border-cool-gray text-carlos-navy lg:hidden" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="開啟選單">
@@ -607,187 +761,80 @@
       <nav class="editorial-container grid py-3" aria-label="手機導覽">
         <a class="mobile-nav-link min-h-[48px] border-b border-cool-gray/70 py-3 font-medium text-carlos-navy" href="#about">關於我們</a>
         <a class="mobile-nav-link min-h-[48px] border-b border-cool-gray/70 py-3 font-medium text-carlos-navy" href="#services">服務項目</a>
-        <a class="mobile-nav-link min-h-[48px] border-b border-cool-gray/70 py-3 font-medium text-carlos-navy" href="#core-products">實戰管理訂閱計畫</a>
-        <a class="mobile-nav-link min-h-[48px] py-3 font-medium text-carlos-navy" href="#consultation">管理諮詢</a>
+        <a class="mobile-nav-link min-h-[48px] py-3 font-medium text-carlos-navy" href="#consultation">服務諮詢</a>
       </nav>
     </div>
   </header>
 
   <main id="main-content">
     <!-- Hero -->
-    <section id="home" class="hero-intelligence flex min-h-screen items-center pt-24" aria-labelledby="hero-title">
-      <div class="editorial-container grid items-center gap-14 py-16 lg:grid-cols-12 lg:py-24 xl:gap-20">
-        <div class="lg:col-span-7 xl:col-span-7">
-          <h1 id="hero-title" class="hero-title">
-            <span class="hero-line">把新手主管沒人教、</span><span class="hero-line">也不好問的問題，</span><span class="hero-line">慢慢講清楚。</span>
+    <section id="home" class="hero-intelligence flex items-center pt-20" aria-labelledby="hero-title">
+      <div class="editorial-container grid items-center gap-8 py-6 lg:grid-cols-12 lg:py-4 xl:gap-12">
+        <div class="lg:col-span-7 lg:pr-6 xl:col-span-7">
+
+          <h1 id="hero-title" class="hero-title max-w-none">
+            <span id="typewriter-text"><span style="display:inline-block;white-space:nowrap">把新手主管沒人教、</span><br /><span style="display:inline-block;white-space:nowrap">也不好問的問題，</span><br /><span style="display:inline-block;white-space:nowrap">慢慢講清楚。</span></span><span id="typewriter-cursor" class="type-cursor" aria-hidden="true"></span>
           </h1>
 
-          <div class="hero-support-stage mt-9 flex max-w-3xl items-start gap-5 sm:gap-7">
-            <img src="assets/logo.webp" class="h-24 w-24 shrink-0 object-contain sm:h-32 sm:w-32" width="140" height="140" alt="卡洛斯 LOGO" />
-            <div class="border-l border-olive-green/60 pl-5 sm:pl-7">
-              <p class="text-base font-semibold tracking-wide text-carlos-navy sm:text-lg">卡洛斯｜新手主管的實戰觀察</p>
-              <p class="mt-3 max-w-2xl font-serif text-xl leading-relaxed text-charcoal/85 sm:text-2xl">
-                很多管理問題，不是你不會，<br class="hidden sm:block" />
-                而是從來沒有人告訴你正在發生什麼。
-              </p>
+          <div class="hero-support-stage mt-5 max-w-3xl border-l border-olive-green/60 pl-4 sm:pl-5">
+            <p class="max-w-2xl font-serif text-xl leading-[1.65] text-charcoal/85 sm:text-2xl">
+              很多管理問題，不是你不會，<br class="hidden sm:block" />
+              而是從來沒有人告訴你正在發生什麼。
+            </p>
+          </div>
+
+          <div class="hero-support-stage mt-4 max-w-2xl text-base leading-7 text-charcoal/75 sm:text-lg sm:leading-8">
+            <p class="font-bold text-olive-green"><span class="block">給剛開始帶人的主管，也給想要承擔主管責任的你，</span><span class="block">助你成為理想中的主管！</span></p>
+          </div>
+
+          <div class="hero-support-stage mt-5 flex flex-col gap-3 sm:flex-row">
+            <a href="#cases" class="btn-primary">探索管理解析 <span class="btn-arrow" aria-hidden="true">→</span></a>
+            <a href="#consultation" class="btn-secondary">預約管理諮詢 <span class="btn-arrow" aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+
+        <div class="brand-mark-stage hero-brand-stack lg:col-span-5" aria-label="卡洛斯品牌識別與新手主管成長階段">
+          <figure class="hero-logo-wrap overflow-hidden">
+            <video id="brand-video" class="official-logo h-full w-full object-cover" autoplay muted playsinline preload="metadata" aria-label="卡洛斯品牌影片">
+              <source src="media/卡洛斯品牌v.mp4" type="video/mp4" />
+              您的瀏覽器不支援影片播放。
+            </video>
+          </figure>
+          <div class="hero-journey">
+            <h2 class="font-serif text-xl font-semibold text-carlos-navy">新手主管的三個成長階段</h2>
+            <div class="journey-steps mt-3">
+              <div class="journey-step rounded-lg border border-cool-gray bg-white/90 shadow-soft"><span class="whitespace-nowrap text-xs font-bold text-olive-green">第一部</span><div><h3 class="text-sm font-semibold text-carlos-navy">從做事的人，到真正的主管</h3><p class="mt-1 text-charcoal/65">完成角色轉換，理解自己的責任、價值與位置。</p></div></div>
+              <div class="journey-step rounded-lg border border-cool-gray bg-white/90 shadow-soft"><span class="whitespace-nowrap text-xs font-bold text-olive-green">第二部</span><div><h3 class="text-sm font-semibold text-carlos-navy">從自己做，到帶著團隊做</h3><p class="mt-1 text-charcoal/65">從分工、授權與回饋開始，建立團隊前進的方式。</p></div></div>
+              <div class="journey-step rounded-lg border border-cool-gray bg-white/90 shadow-soft"><span class="whitespace-nowrap text-xs font-bold text-olive-green">第三部</span><div><h3 class="text-sm font-semibold text-carlos-navy">從管理事情，到開始影響組織</h3><p class="mt-1 text-charcoal/65">把管理判斷帶進跨部門合作、向上溝通與組織運作。</p></div></div>
             </div>
           </div>
-
-          <div class="hero-support-stage mt-10 max-w-2xl body-copy text-charcoal/75">
-            <p>給剛開始帶人的主管，也給想要承擔主管責任的你，助你成為理想中的主管！</p>
-          </div>
-
-          <div class="hero-support-stage mt-10 flex flex-col gap-3 sm:flex-row">
-            <a href="#article-covers" class="btn-primary">探索管理觀察 <span class="btn-arrow" aria-hidden="true">→</span></a>
-            <a href="https://calendar.app.google/J85Lxbxq5Jn2em9z7" target="_blank" rel="noopener noreferrer" class="btn-secondary">預約管理諮詢 <span class="btn-arrow" aria-hidden="true">↗</span></a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Brand Statement -->
-    <section class="section-pad bg-warm-white" aria-labelledby="brand-statement-title">
-      <div class="editorial-container grid gap-10 lg:grid-cols-12">
-        <div class="reveal lg:col-span-4">
-          <p class="eyebrow">品牌理念</p>
-          <p class="mt-4 max-w-xs text-sm leading-7 text-steel-blue">管理不是收集更多答案，而是從看清楚現場開始。</p>
-        </div>
-        <div class="reveal lg:col-span-8" style="--delay: 100ms;">
-          <h2 id="brand-statement-title" class="display-title max-w-4xl font-serif"><span class="sentence-part">管理不是知道更多答案，</span><span class="sentence-part">而是學會看懂正在發生什麼。</span></h2>
-          <div class="mt-10 grid gap-8 md:grid-cols-2">
-            <div class="body-copy text-charcoal/78">
-              <p>很多新手主管不是不努力，而是缺少可以參考的判斷框架。</p>
-              <p class="mt-6">管理現場同時包含目標壓力、團隊情緒、部屬配合度、主管期待、跨部門合作與顧客需求。</p>
-              <p class="mt-6 font-semibold text-carlos-navy">如果只靠個性與直覺，很容易：越帶越累，也越管越孤單。</p>
-            </div>
-            <div class="border-t border-cool-gray pt-6 md:border-l md:border-t-0 md:pl-8 md:pt-0">
-              <p class="eyebrow">我們如何協助</p>
-              <div class="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-sm leading-6 text-charcoal/72">
-                <span>管理文章</span><span>案例分析</span>
-                <span>直播課程</span><span>管理工具</span>
-                <span>培訓課程</span><span>企業內訓</span>
-              </div>
-              <p class="mt-8 font-serif text-xl leading-8 text-carlos-navy">看見問題 → 理解問題 → 建立判斷 → 採取行動</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Leadership Journey -->
-    <section class="section-pad bg-white" aria-labelledby="journey-title">
-      <div class="editorial-container">
-        <div class="reveal flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div>
-            <p class="eyebrow">主管成長歷程</p>
-            <h2 id="journey-title" class="display-title mt-4"><span class="sentence-part">主管角色，</span><span class="sentence-part">不只是一個職稱的改變。</span></h2>
-          </div>
-          <p class="max-w-md text-sm leading-7 text-charcoal/65">一段從個人貢獻者到團隊帶領者的角色轉換，需要重新理解責任、決策與組織位置。</p>
-        </div>
-
-        <div class="reveal mt-14 grid gap-3 md:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] md:items-center" style="--delay: 100ms;">
-          <article class="border-t border-cool-gray pt-5 md:min-h-[190px]">
-            <span class="font-inter text-xs font-semibold tracking-[0.15em] text-steel-blue">階段 01</span>
-            <h3 class="mt-5 font-serif text-2xl leading-snug text-carlos-navy"><span class="sentence-part">從「做好自己的事」</span></h3>
-          </article>
-          <span class="hidden text-steel-blue/50 md:block" aria-hidden="true">→</span>
-          <article class="border-t border-cool-gray pt-5 md:min-h-[190px]">
-            <span class="font-inter text-xs font-semibold tracking-[0.15em] text-steel-blue">階段 02</span>
-            <h3 class="mt-5 font-serif text-2xl leading-snug text-carlos-navy"><span class="sentence-part">成為「開始帶人的主管」</span></h3>
-          </article>
-          <span class="hidden text-steel-blue/50 md:block" aria-hidden="true">→</span>
-          <article class="border-t border-cool-gray pt-5 md:min-h-[190px]">
-            <span class="font-inter text-xs font-semibold tracking-[0.15em] text-steel-blue">階段 03</span>
-            <h3 class="mt-5 font-serif text-2xl leading-snug text-carlos-navy"><span class="sentence-part">學會「讓團隊完成事情」</span></h3>
-          </article>
-          <span class="hidden text-steel-blue/50 md:block" aria-hidden="true">→</span>
-          <article class="border-t border-cool-gray pt-5 md:min-h-[190px]">
-            <span class="font-inter text-xs font-semibold tracking-[0.15em] text-steel-blue">階段 04</span>
-            <h3 class="mt-5 font-serif text-2xl leading-snug text-carlos-navy"><span class="sentence-part">理解「自己正在組織中扮演什麼角色」</span></h3>
-          </article>
-        </div>
-
-        <div class="reveal mt-10 flex items-center gap-6" style="--delay: 180ms;">
-          <div class="journey-line flex-1"></div>
-          <p class="font-serif text-lg text-carlos-navy sm:text-2xl">從做事的人，走向會帶人的主管。</p>
         </div>
       </div>
     </section>
 
     <!-- About Carlos -->
     <section id="about" class="section-pad scroll-mt-24 bg-warm-white" aria-labelledby="about-title">
-      <div class="editorial-container grid gap-12 lg:grid-cols-12">
-        <div class="reveal lg:col-span-4">
+      <div class="editorial-container grid gap-10 lg:grid-cols-12 lg:items-start">
+        <div class="reveal lg:col-span-5">
           <p class="eyebrow">關於卡洛斯</p>
-          <div class="mt-7 border-t border-cool-gray pt-6">
-            <p class="font-serif text-4xl text-carlos-navy">卡洛斯</p>
-            <p class="mt-3 text-sm font-semibold text-steel-blue">卡洛斯實戰管理顧問 創辦人</p>
-            <p class="mt-1 text-sm text-charcoal/65">實戰型管理教練</p>
+          <div class="mt-7 flex items-center gap-5">
+            <img src="mywork/LOGO-symbol.png" alt="卡洛斯品牌標誌" class="h-24 w-24 shrink-0 object-contain sm:h-28 sm:w-28" loading="lazy" />
+            <p class="font-serif text-3xl font-semibold text-carlos-navy sm:text-4xl">卡洛斯</p>
           </div>
-
-          <figure class="mt-8 max-w-[220px]">
-            <img src="assets/logo.webp" alt="卡洛斯實戰管理顧問品牌 LOGO" class="w-full rounded-xl border border-cool-gray bg-white object-contain p-3 shadow-soft" loading="lazy" />
-            <figcaption class="mt-3 font-inter text-[10px] font-semibold uppercase tracking-[0.16em] text-steel-blue">Carlos Management Practice</figcaption>
-          </figure>
-
-          
-        </div>
-
-        <div class="reveal lg:col-span-8 lg:pl-8" style="--delay: 100ms;">
-          <h2 id="about-title" class="display-title max-w-4xl"><span class="sentence-part">真正的管理學習，</span><span class="sentence-part">往往從第一次需要對別人的工作負責開始。</span></h2>
-          <div class="mt-9 longform body-copy text-charcoal/78">
-            <p>我是一位專注於新手主管成長的實戰型管理教練。</p>
-            <p class="mt-5">我關注的不是遙遠的高階管理理論，而是新手主管真正會遇到的第一線問題：剛升主管後如何站穩角色、如何帶領團隊、如何交辦任務、如何面對資深員工、如何處理向上管理、如何進行跨部門溝通，以及如何面對目標與績效壓力。</p>
-            <p class="mt-5">我的目標，是把那些<span class="font-semibold text-carlos-navy">沒人教，也不好問的管理難題，慢慢講清楚。</span></p>
-            <p class="mt-5">管理經驗來自真實組織現場。畢業後進入上市公司工作，之後被派任至子公司擔任經理，歷經多個組織與管理職務，累積約 15 年第一線工作與管理經驗，曾帶領數十人團隊，並負責大型通路營運。</p>
-          </div>
-
-          <blockquote class="mt-12 max-w-4xl border-y border-cool-gray py-9">
-            <div class="quote-mark" aria-hidden="true">“</div>
-            <p class="mt-4 font-serif text-2xl leading-relaxed text-carlos-navy sm:text-3xl">管理不是有了職稱就自然會發生，而是在真正開始帶人之後，才開始學習。</p>
-          </blockquote>
-        </div>
-      </div>
-    </section>
-
-    <!-- Signature Framework -->
-    <section id="method" class="section-pad scroll-mt-24 bg-white" aria-labelledby="method-title">
-      <div class="editorial-container">
-        <div class="reveal grid gap-7 lg:grid-cols-12">
-          <div class="lg:col-span-4">
-            <p class="eyebrow">管理研究架構</p>
-          </div>
-          <div class="lg:col-span-8">
-            <h2 id="method-title" class="display-title"><span class="sentence-part">先看懂現場，</span><span class="sentence-part">再決定怎麼做。</span></h2>
-            <p class="mt-6 max-w-2xl body-copy text-charcoal/68">管理不是立刻給答案，而是沿著一個更穩定的判斷路徑，從觀察走向成長。</p>
+          <div class="mt-7 border-y border-cool-gray py-6">
+            <p class="whitespace-nowrap font-semibold leading-8 text-carlos-navy" style="font-size:clamp(.8rem,3.5vw,1.125rem)">新手主管的實戰管理顧問</p>
+            <p class="mt-3 whitespace-nowrap leading-7 text-steel-blue" style="font-size:clamp(.75rem,3.3vw,1rem)">卡洛斯實戰管理顧問公司創辦人</p>
+            <p class="mt-5 whitespace-nowrap border-l-2 border-olive-green pl-4 font-semibold leading-7 text-olive-green" style="font-size:clamp(.72rem,3.1vw,1rem)">冷靜地看懂管理現場，陪新手主管站穩第一步。</p>
           </div>
         </div>
-
-        <div id="framework-track" class="framework-track mt-16 grid gap-8 md:grid-cols-5 md:gap-4">
-          <article class="framework-step reveal grid grid-cols-[68px_1fr] gap-5 md:block md:text-center" data-framework-step>
-            <div class="framework-number">01</div>
-            <div class="md:mt-6">
-              <h3 class="font-inter text-base font-semibold text-carlos-navy"><span class="sentence-part">觀察</span></h3>
-              <p class="mt-1 text-sm text-steel-blue">觀察</p>
-            </div>
-          </article>
-          <article class="framework-step reveal grid grid-cols-[68px_1fr] gap-5 md:block md:text-center" data-framework-step style="--delay: 90ms;">
-            <div class="framework-number">02</div>
-            <div class="md:mt-6"><h3 class="font-inter text-base font-semibold text-carlos-navy"><span class="sentence-part">洞察</span></h3><p class="mt-1 text-sm text-steel-blue">理解脈絡</p></div>
-          </article>
-          <article class="framework-step reveal grid grid-cols-[68px_1fr] gap-5 md:block md:text-center" data-framework-step style="--delay: 180ms;">
-            <div class="framework-number">03</div>
-            <div class="md:mt-6"><h3 class="font-inter text-base font-semibold text-carlos-navy"><span class="sentence-part">判斷</span></h3><p class="mt-1 text-sm text-steel-blue">做出選擇</p></div>
-          </article>
-          <article class="framework-step reveal grid grid-cols-[68px_1fr] gap-5 md:block md:text-center" data-framework-step style="--delay: 270ms;">
-            <div class="framework-number">04</div>
-            <div class="md:mt-6"><h3 class="font-inter text-base font-semibold text-carlos-navy"><span class="sentence-part">行動</span></h3><p class="mt-1 text-sm text-steel-blue">付諸實踐</p></div>
-          </article>
-          <article class="framework-step reveal grid grid-cols-[68px_1fr] gap-5 md:block md:text-center" data-framework-step style="--delay: 360ms;">
-            <div class="framework-number">05</div>
-            <div class="md:mt-6"><h3 class="font-inter text-base font-semibold text-carlos-navy"><span class="sentence-part">成長</span></h3><p class="mt-1 text-sm text-steel-blue">持續精進</p></div>
-          </article>
+        <div class="reveal lg:col-span-7 lg:pl-8" style="--delay:100ms;">
+          <h2 id="about-title" class="display-title max-w-4xl">真正的管理學習，從開始對別人的工作負責開始。</h2>
+          <div class="mt-7 max-w-3xl space-y-5 text-base leading-8 text-charcoal/78 sm:text-lg sm:leading-9">
+            <p>我是一位專注於新手主管成長的實戰型管理教練，關注主管在角色轉換、帶領團隊、任務交辦、向上管理與跨部門合作中，真正會遇到的問題。</p>
+            <p>累積約 15 年第一線工作與管理經驗，曾歷經多個組織與管理職務、帶領數十人團隊，並負責大型通路營運。</p>
+            <p class="font-semibold text-carlos-navy">我希望把那些沒人教、也不好問的管理難題，慢慢講清楚。</p>
+          </div>
+          <p class="mt-7 max-w-3xl border-t border-cool-gray pt-6 font-serif text-xl font-semibold leading-relaxed text-olive-green">管理不是有了職稱就自然會發生，而是在真正開始帶人之後，才開始學習。</p>
         </div>
       </div>
     </section>
@@ -798,130 +845,86 @@
         <div class="reveal grid gap-8 lg:grid-cols-12">
           <div class="lg:col-span-4"><p class="eyebrow">服務項目</p></div>
           <div class="lg:col-span-8">
-            <h2 id="services-title" class="display-title"><span class="sentence-part">陪主管把管理能力，</span><span class="sentence-part">真正用在現場。</span></h2>
+            <h2 id="services-title" class="display-title">陪主管把管理能力，真正用在現場。</h2>
             <p class="mt-5 max-w-2xl body-copy text-charcoal/68">專注於新手主管成長的實戰型管理教練與管理顧問服務。</p>
           </div>
         </div>
 
-        <div class="services-grid"><a class="service-card" href="#consultation"><span class="eyebrow">01</span><h3><span class="sentence-part">企業內訓</span></h3><p>針對企業新任主管與儲備主管，設計能帶回現場使用的管理訓練。</p><span class="service-action">洽詢企業內訓 →</span></a><a class="service-card" href="#consultation"><span class="eyebrow">02</span><h3><span class="sentence-part">主題講座</span></h3><p>從角色轉換、帶人、交辦到溝通，分享第一線管理的實務觀察。</p><span class="service-action">洽詢主題講座 →</span></a><a class="service-card" href="#article-covers"><span class="eyebrow">03</span><h3><span class="sentence-part">免費實戰管理解析</span></h3><p>閱讀《新手主管會遇到的100個問題》，從真實情境練習管理判斷。</p><span class="service-action">閱讀免費文章 →</span></a><a class="service-card" href="#core-products"><span class="eyebrow">04</span><h3><span class="sentence-part">實戰管理訂閱制服務</span></h3><p>每月兩篇深度文章、每月直播、直播回放與管理工具模板，陪你把那些沒人教、也不好問的新手主管問題，慢慢講清楚。</p><span class="service-action">瞭解訂閱計畫 →</span></a></div>
+        
+        
+        
+        <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <a href="#cases" class="signature-card reveal rounded-2xl border border-cool-gray bg-white p-6 shadow-soft"><span class="font-inter text-sm font-semibold tracking-[0.12em] text-steel-blue">01</span><p class="mt-7 text-sm font-semibold tracking-[0.1em] text-steel-blue">公開內容</p><h3 class="card-title mt-3 text-2xl font-semibold text-carlos-navy">實戰管理解析</h3><p class="mt-4 text-base leading-7 text-charcoal/68">從真實管理情境拆解問題，建立可以採取行動的判斷。</p></a>
+          <a href="#core-products" class="signature-card reveal rounded-2xl border border-cool-gray bg-white p-6 shadow-soft" style="--delay:80ms;"><span class="font-inter text-sm font-semibold tracking-[0.12em] text-steel-blue">02</span><p class="mt-7 text-sm font-semibold tracking-[0.1em] text-steel-blue">持續成長</p><h3 class="card-title mt-3 text-2xl font-semibold text-carlos-navy">實戰管理訂閱制服務</h3><p class="mt-4 text-base leading-7 text-charcoal/68">每月深度文章、直播、回放與管理工具模板，陪你持續練習。</p></a>
+          <a href="#consultation" class="signature-card reveal rounded-2xl border border-cool-gray bg-white p-6 shadow-soft" style="--delay:160ms;"><span class="font-inter text-sm font-semibold tracking-[0.12em] text-steel-blue">03</span><p class="mt-7 text-sm font-semibold tracking-[0.1em] text-steel-blue">組織人才發展</p><h3 class="card-title mt-3 text-2xl font-semibold text-carlos-navy">企業內訓</h3><p class="mt-4 text-base leading-7 text-charcoal/68">為新任主管與儲備主管設計能帶回管理現場使用的訓練。</p></a>
+          <a href="#consultation" class="signature-card reveal rounded-2xl border border-cool-gray bg-white p-6 shadow-soft" style="--delay:240ms;"><span class="font-inter text-sm font-semibold tracking-[0.12em] text-steel-blue">04</span><p class="mt-7 text-sm font-semibold tracking-[0.1em] text-steel-blue">管理主題分享</p><h3 class="card-title mt-3 text-2xl font-semibold text-carlos-navy">主題講座</h3><p class="mt-4 text-base leading-7 text-charcoal/68">聚焦角色轉換、帶人、交辦、溝通與向上管理等實務主題。</p></a>
+        </div>
+
       </div>
     </section>
 
-    <!-- Management Notes -->
-    
-
-    <!-- Practice Article Covers -->
-    <section id="article-covers" class="section-pad scroll-mt-24 bg-warm-white" aria-labelledby="article-covers-title"><div class="editorial-container"><p class="eyebrow">免費實戰管理解析</p><h2 id="article-covers-title" class="display-title mt-4">每一篇文章，<br/>都是一次現場練習。</h2><p class="body-copy mt-6 catalog-intro">把管理現場拆開來看，從每一篇解析找到可以帶回工作的判斷線索。</p><p class="body-copy mt-3 catalog-intro">《新手主管會遇到的100個問題》持續整理角色、溝通與團隊帶領中的真實問題。目前收錄 39 篇，依文章順序閱讀。</p><div class="catalog-toolbar"><label for="article-search">搜尋篇名或篇次</label><input type="search" id="article-search" placeholder="例如：交辦、團隊、13"/><p id="article-count" role="status" aria-live="polite">共 39 篇文章</p></div><div class="article-grid"><article class="article-card" data-title="升上主管後，為什麼你越努力越焦慮？" data-number="1"><a href="articles/01.html"><img src="assets/article-01.webp" alt="升上主管後，為什麼你越努力越焦慮？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">01 / 新手主管實戰觀察</p><h3><span class="sentence-part">升上主管後，</span><span class="sentence-part">為什麼你越努力越焦慮？</span></h3><p class="article-excerpt">剛升遷為主管後的某個早晨，心裡很高興，自己的貢獻被公司看到了，薪水增加，也被賦予更高的職位與權力，滿心期待帶兵打仗，帶領員工完成更多任務！</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="沒準備好就當主管，是不是注定會失敗？" data-number="2"><a href="articles/02.html"><img src="assets/article-02.webp" alt="沒準備好就當主管，是不是注定會失敗？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">02 / 新手主管實戰觀察</p><h3><span class="sentence-part">沒準備好就當主管，</span><span class="sentence-part">是不是注定會失敗？</span></h3><p class="article-excerpt">很多人第一次被升為主管時，內心的第一個反應，不是興奮，而是疑問：我真的準備好了嗎？</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="升上主管後，事情該自己做，還是交出去？" data-number="3"><a href="articles/03.html"><img src="assets/article-03.webp" alt="升上主管後，事情該自己做，還是交出去？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">03 / 新手主管實戰觀察</p><h3><span class="sentence-part">升上主管後，</span><span class="sentence-part">事情該自己做，</span><span class="sentence-part">還是交出去？</span></h3><p class="article-excerpt">升上主管後，很多人都會開始思考一件事：我是不是應該把事情都分出去，專心做管理？</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="我以前很會做事，但現在好像什麼都不對？" data-number="4"><a href="articles/04.html"><img src="assets/article-04.webp" alt="我以前很會做事，但現在好像什麼都不對？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">04 / 新手主管實戰觀察</p><h3><span class="sentence-part">我以前很會做事，</span><span class="sentence-part">但現在好像什麼都不對？</span></h3><p class="article-excerpt">事情很多，你已經應接不暇。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="當主管後，我的價值到底是什麼？" data-number="5"><a href="articles/05.html"><img src="assets/article-05.webp" alt="當主管後，我的價值到底是什麼？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">05 / 新手主管實戰觀察</p><h3><span class="sentence-part">當主管後，</span><span class="sentence-part">我的價值到底是什麼？</span></h3><p class="article-excerpt">你剛擔任主管時，會不會出現過一種感覺：團隊很忙，但你卻有點空。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="當主管後，為什麼開始覺得孤單？" data-number="6"><a href="articles/06.html"><img src="assets/article-06.webp" alt="當主管後，為什麼開始覺得孤單？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">06 / 新手主管實戰觀察</p><h3><span class="sentence-part">當主管後，</span><span class="sentence-part">為什麼開始覺得孤單？</span></h3><p class="article-excerpt">當主管後，你有沒有過這種感覺：明每天都在跟很多人說話，但心裡卻越來越安靜。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="從明星員工到主管，為什麼越能幹的人越容易卡住？" data-number="7"><a href="articles/07.html"><img src="assets/article-07.webp" alt="從明星員工到主管，為什麼越能幹的人越容易卡住？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">07 / 新手主管實戰觀察</p><h3><span class="sentence-part">從明星員工到主管，</span><span class="sentence-part">為什麼越能幹的人越容易卡住？</span></h3><p class="article-excerpt">很多人升上主管後，第一個直覺反應是：我是不是還不夠強？</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼主管要先理解自己？" data-number="8"><a href="articles/08.html"><img src="assets/article-08.webp" alt="為什麼主管要先理解自己？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">08 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼主管要先理解自己？</span></h3><p class="article-excerpt">同樣一句話，你只是想提醒進度，員工卻覺得你在不爽；你自己以為已經講得很清楚，但團隊常常搞錯你的意思；你覺得自己只是比較要求細節，別人卻開始覺得你難溝通、壓力大。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="你想成為什麼樣的主管？" data-number="9"><a href="articles/09.html"><img src="assets/article-09.webp" alt="你想成為什麼樣的主管？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">09 / 新手主管實戰觀察</p><h3><span class="sentence-part">你想成為什麼樣的主管？</span></h3><p class="article-excerpt">當你成為主管後，你想成為什麼樣的人？</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="前任主管的影子還在，你該怎麼站穩？" data-number="10"><a href="articles/10.html"><img src="assets/article-10.webp" alt="前任主管的影子還在，你該怎麼站穩？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">10 / 新手主管實戰觀察</p><h3><span class="sentence-part">前任主管的影子還在，</span><span class="sentence-part">你該怎麼站穩？</span></h3><p class="article-excerpt">你剛到新單位接任主管，還在熟悉團隊、客戶與工作節奏，卻發現前任主管雖然已經離開，影響力還留在團隊，他仍和員工聯絡，也和重要客戶互動，甚至還會評論你的做法，這時候你會很難受。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="新任主管如何快速站穩位置：建立第一個戰功！" data-number="11"><a href="articles/11.html"><img src="assets/article-11.webp" alt="新任主管如何快速站穩位置：建立第一個戰功！ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">11 / 新手主管實戰觀察</p><h3><span class="sentence-part">新任主管如何快速站穩位置：</span><span class="sentence-part">建立第一個戰功！</span></h3><p class="article-excerpt">剛接任主管時，事情一件接著一件來，團隊還在觀望你、上級開始期待成果、客戶也不一定信任你，你每天都在處理問題，卻覺得自己好像只是被事情追著跑，這時候，新手主管最需要的，不是立刻大改革，也不是急著證明自己很強，你真正需要的是，建立第一個看得見的戰功。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="有一天沒有了職位，還有多少人願意跟著你？" data-number="12"><a href="articles/12.html"><img src="assets/article-12.webp" alt="有一天沒有了職位，還有多少人願意跟著你？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">12 / 新手主管實戰觀察</p><h3><span class="sentence-part">有一天沒有了職位，</span><span class="sentence-part">還有多少人願意跟著你？</span></h3><p class="article-excerpt">有些人心裡的答案是：「我要讓大家知道，我現在是主管，我是老大。」</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="明明是合理分工，為什麼團隊卻覺得你在針對他們？" data-number="13"><a href="articles/13.html"><img src="assets/article-13.webp" alt="明明是合理分工，為什麼團隊卻覺得你在針對他們？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">13 / 新手主管實戰觀察</p><h3><span class="sentence-part">明明是合理分工，</span><span class="sentence-part">為什麼團隊卻覺得你在針對他們？</span></h3><p class="article-excerpt">剛升上主管時，很多人心裡都會冒出一個念頭：終於輪到我了，很多早就該改的事，現在可以動手了。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼你忙到崩潰，團隊卻還是不會自己動？" data-number="14"><a href="articles/14.html"><img src="assets/article-14.webp" alt="為什麼你忙到崩潰，團隊卻還是不會自己動？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">14 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼你忙到崩潰，</span><span class="sentence-part">團隊卻還是不會自己動？</span></h3><p class="article-excerpt">你一整天幾乎沒停過。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼主管要定期和員工一對一談話？" data-number="15"><a href="articles/15.html"><img src="assets/article-15.webp" alt="為什麼主管要定期和員工一對一談話？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">15 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼主管要定期和員工一對一談話？</span></h3><p class="article-excerpt">團隊表面上看起來都正常，大家每天都有來上班，也都有完成手上的工作，但你總覺得，有些事情你看不到，有些人好像變得比較沉默、有些人的加班變多了、有些費用申報開始增加、有些同事之間的互動，明明沒有吵架，卻感覺氣氛不太對。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="新任主管面對員工質疑與不信任，該怎麼辦？" data-number="16"><a href="articles/16.html"><img src="assets/article-16.webp" alt="新任主管面對員工質疑與不信任，該怎麼辦？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">16 / 新手主管實戰觀察</p><h3><span class="sentence-part">新任主管面對員工質疑與不信任，</span><span class="sentence-part">該怎麼辦？</span></h3><p class="article-excerpt">他們年輕、有活力、反應快，氣氛好的時候，可以一起加班、一起衝刺，甚至不吃飯也願意把事情完成。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼主管要先找出團隊裡的關鍵人物？" data-number="17"><a href="articles/17.html"><img src="assets/article-17.webp" alt="為什麼主管要先找出團隊裡的關鍵人物？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">17 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼主管要先找出團隊裡的關鍵人物？</span></h3><p class="article-excerpt">你明明把任務說清楚了，也說明這是公司接下來的重要方向，但團隊反應卻很冷，有人表面點頭，私下觀望，有人沒有反對，但也沒有真正投入。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="真正厲害的主管，都會先做一件事：看懂工作現場" data-number="18"><a href="articles/18.html"><img src="assets/article-18.webp" alt="真正厲害的主管，都會先做一件事：看懂工作現場 — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">18 / 新手主管實戰觀察</p><h3><span class="sentence-part">真正厲害的主管，</span><span class="sentence-part">都會先做一件事：</span><span class="sentence-part">看懂工作現場</span></h3><p class="article-excerpt">你很努力開會、追進度、看報表，但做了一段時間後，抬頭卻忽然發現有些人的工作量已經水淹到脖子、有些流程只是前面帶的人教他這樣做、有些人好像很忙，但卻是在瞎忙(沒創造價值)、有些人能力很好，卻被放錯位置、似乎有些未爆彈，正在慢慢累積？</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼新手主管要公開讚美，私下指正？" data-number="19"><a href="articles/19.html"><img src="assets/article-19.webp" alt="為什麼新手主管要公開讚美，私下指正？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">19 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼新手主管要公開讚美，</span><span class="sentence-part">私下指正？</span></h3><p class="article-excerpt">明明只是想提醒員工不要再犯，但話一說出口，氣氛立刻變了，會議結束後，員工變得比較安靜，連原本愛聊天的人，也開始裝忙；甚至有些人表面接受，私底下卻開始抱怨，「不經意」的就傳到你的耳中。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼你講了很多次，團隊裡還是有人做錯？" data-number="20"><a href="articles/20.html"><img src="assets/article-20.webp" alt="為什麼你講了很多次，團隊裡還是有人做錯？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">20 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼你講了很多次，</span><span class="sentence-part">團隊裡還是有人做錯？</span></h3><p class="article-excerpt">你明明已經講過了，甚至講了很多次，開會講一次、群組再提醒一次、私下又補充一次，結果事情最後還是做錯，這時候你心裡可能會想：「到底有沒有在聽？」</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼主管不能太快下結論？" data-number="21"><a href="articles/21.html"><img src="assets/article-21.webp" alt="為什麼主管不能太快下結論？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">21 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼主管不能太快下結論？</span></h3><p class="article-excerpt">團隊發生一個問題，A 員工跑來跟你說：「主管，我覺得應該這樣做。」</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼你的團隊，開始不跟你說真話？" data-number="22"><a href="articles/22.html"><img src="assets/article-22.webp" alt="為什麼你的團隊，開始不跟你說真話？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">22 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼你的團隊，</span><span class="sentence-part">開始不跟你說真話？</span></h3><p class="article-excerpt">1996 年的台灣軍教電影《號角響起》中，有一段讓人印象深刻的劇情，飾演小兵的蘇有朋，在軍長面前忍不住哭訴操練的辛苦與當兵的真實狀況，讓一旁飾演同梯的林志穎傻眼：當兵不能講實話還講。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼主管不能逃避團隊衝突？" data-number="23"><a href="articles/23.html"><img src="assets/article-23.webp" alt="為什麼主管不能逃避團隊衝突？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">23 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼主管不能逃避團隊衝突？</span></h3><p class="article-excerpt">昨天晚上，因為業績不佳，上級臨時要求你隔天一早提出一份改善報告，你一路改到深夜，好不容易交出去，主管卻只回了一句：「方向不對，再修改。」</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="主管容易犯的錯誤，就是把「魔鬼藏在細節裡」當成管理方式" data-number="24"><a href="articles/24.html"><img src="assets/article-24.webp" alt="主管容易犯的錯誤，就是把「魔鬼藏在細節裡」當成管理方式 — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">24 / 新手主管實戰觀察</p><h3><span class="sentence-part">主管容易犯的錯誤，</span><span class="sentence-part">就是把「魔鬼藏在細節裡」當成管理方式</span></h3><p class="article-excerpt">這句話，你一定聽過。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼主管不能忽略員工犯的小錯？" data-number="25"><a href="articles/25.html"><img src="assets/article-25.webp" alt="為什麼主管不能忽略員工犯的小錯？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">25 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼主管不能忽略員工犯的小錯？</span></h3><p class="article-excerpt">員工安排匯款出了一點小差錯，金額不大、時間只差幾天，事情最後也處理完了，你可能會想：「還好，問題不大，下次注意就好。」</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="主管怎麼掌握團隊，又不讓員工只會等答案？" data-number="26"><a href="articles/26.html"><img src="assets/article-26.webp" alt="主管怎麼掌握團隊，又不讓員工只會等答案？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">26 / 新手主管實戰觀察</p><h3><span class="sentence-part">主管怎麼掌握團隊，</span><span class="sentence-part">又不讓員工只會等答案？</span></h3><p class="article-excerpt">成為主管後，你要處理的事情越來越多，但你還是需要知道每個人在做什麼，否則等到問題爆開才知道，往往已經太晚，因此，有些主管開始緊迫盯人，追進度、要報表，搞得自己很累，員工也覺得很壓力很大。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="新手主管不懂得拒絕，為什麼反而更難帶人？" data-number="27"><a href="articles/27.html"><img src="assets/article-27.webp" alt="新手主管不懂得拒絕，為什麼反而更難帶人？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">27 / 新手主管實戰觀察</p><h3><span class="sentence-part">新手主管不懂得拒絕，</span><span class="sentence-part">為什麼反而更難帶人？</span></h3><p class="article-excerpt">剛當主管時，員工跑來跟你說：「我的電腦真的太慢了，每次跑資料都要等很久，可不可以幫我換一台規格好一點的？」</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼有些員工明明很努力，工作成果卻不成比例？" data-number="28"><a href="articles/28.html"><img src="assets/article-28.webp" alt="為什麼有些員工明明很努力，工作成果卻不成比例？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">28 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼有些員工明明很努力，</span><span class="sentence-part">工作成果卻不成比例？</span></h3><p class="article-excerpt">團隊裡有一種員工，容易讓主管不知道該怎麼評價，他每天很忙、事情很多，甚至經常最後一個下班，沒有人會說他偷懶，因為他比誰都認真；但到了月底回頭看，真正完成的重要工作卻不多，甚至因為太忙，偶爾還會出錯。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="事情變順了，為什麼管理反而可能出了問題？" data-number="29"><a href="articles/29.html"><img src="assets/article-29.webp" alt="事情變順了，為什麼管理反而可能出了問題？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">29 / 新手主管實戰觀察</p><h3><span class="sentence-part">事情變順了，</span><span class="sentence-part">為什麼管理反而可能出了問題？</span></h3><p class="article-excerpt">團隊人員流動率很高，新人一批接著一批，有些工作才剛教會，沒多久又要重新教一次，有一項工作，員工總是做得不夠順，你看了幾次，忍不住想：「算了，我來處理比較快。」</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼你的提案明明有道理，主管會議卻沒人買單？" data-number="30"><a href="articles/30.html"><img src="assets/article-30.webp" alt="為什麼你的提案明明有道理，主管會議卻沒人買單？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">30 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼你的提案明明有道理，</span><span class="sentence-part">主管會議卻沒人買單？</span></h3><p class="article-excerpt">你花了很多時間準備，整理現場問題、盤點員工狀況、甚至想好了解法。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="只是要一份資料，為什麼跨部門溝通會這麼難？" data-number="31"><a href="articles/31.html"><img src="assets/article-31.webp" alt="只是要一份資料，為什麼跨部門溝通會這麼難？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">31 / 新手主管實戰觀察</p><h3><span class="sentence-part">只是要一份資料，</span><span class="sentence-part">為什麼跨部門溝通會這麼難？</span></h3><p class="article-excerpt">你只是想跟另一個部門要一份資料。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼你需要別部門幫忙時，才發現沒人想理你？" data-number="32"><a href="articles/32.html"><img src="assets/article-32.webp" alt="為什麼你需要別部門幫忙時，才發現沒人想理你？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">32 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼你需要別部門幫忙時，</span><span class="sentence-part">才發現沒人想理你？</span></h3><p class="article-excerpt">平常大家各做各的，好像也沒有什麼問題。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="問題發生時，你該先處理，還是先報告？" data-number="33"><a href="articles/33.html"><img src="assets/article-33.webp" alt="問題發生時，你該先處理，還是先報告？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">33 / 新手主管實戰觀察</p><h3><span class="sentence-part">問題發生時，</span><span class="sentence-part">你該先處理，</span><span class="sentence-part">還是先報告？</span></h3><p class="article-excerpt">事情還沒有真的爆開，但你已經感覺到不太對勁，「客戶反應不太好」、「政策執行後現場有阻力」、「某個數據開始異常」、「某位關鍵人物表情不太對」、「上層雖然沒有明講，但似乎正在關注這件事」。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼主管需要建立自己的管理里程碑？" data-number="34"><a href="articles/34.html"><img src="assets/article-34.webp" alt="為什麼主管需要建立自己的管理里程碑？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">34 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼主管需要建立自己的管理里程碑？</span></h3><p class="article-excerpt">當主管一段時間後，你每天都在處理事情。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼你和主管愈溝通，關係反而愈差？" data-number="35"><a href="articles/35.html"><img src="assets/article-35.webp" alt="為什麼你和主管愈溝通，關係反而愈差？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">35 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼你和主管愈溝通，</span><span class="sentence-part">關係反而愈差？</span></h3><p class="article-excerpt">薪資比預期少是離職的一種原因，但更多時候，在職場裡，常讓人心受委屈，甚至想打開電腦更新履歷表的，是每天都要面對的主管，尤其當你升上主管之後，你會發現，除了要帶領團隊，達成目標，處理問題以外，你更需要搞定好你的主管。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼有些主管，換了領域依然能做出成果？" data-number="36"><a href="articles/36.html"><img src="assets/article-36.webp" alt="為什麼有些主管，換了領域依然能做出成果？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">36 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼有些主管，</span><span class="sentence-part">換了領域依然能做出成果？</span></h3><p class="article-excerpt">現在的職場，已經很少有人會在同一家公司工作一輩子！</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼朝令夕改，是主管最大的敵人？" data-number="37"><a href="articles/37.html"><img src="assets/article-37.webp" alt="為什麼朝令夕改，是主管最大的敵人？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">37 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼朝令夕改，</span><span class="sentence-part">是主管最大的敵人？</span></h3><p class="article-excerpt">公司宣布了一項新制度。</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="為什麼你做了很多，上司卻還是覺得你沒有掌握狀況？" data-number="38"><a href="articles/38.html"><img src="assets/article-38.webp" alt="為什麼你做了很多，上司卻還是覺得你沒有掌握狀況？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">38 / 新手主管實戰觀察</p><h3><span class="sentence-part">為什麼你做了很多，</span><span class="sentence-part">上司卻還是覺得你沒有掌握狀況？</span></h3><p class="article-excerpt">主管突然問你：「這件事現在到哪裡了？」</p><span class="service-action">閱讀全文 →</span></div></a></article><article class="article-card" data-title="當你不同意上司的決定，該說還是不該說？" data-number="39"><a href="articles/39.html"><img src="assets/article-39.webp" alt="當你不同意上司的決定，該說還是不該說？ — 文章封面" width="1200" height="675" loading="lazy"/><div class="article-card-body"><p class="article-number">39 / 新手主管實戰觀察</p><h3><span class="sentence-part">當你不同意上司的決定，</span><span class="sentence-part">該說還是不該說？</span></h3><p class="article-excerpt">開會時，上司提出一個做法，你越聽越覺得不太對，有些人會選擇沉默，心裡想著：「反正主管決定就好。」</p><span class="service-action">閱讀全文 →</span></div></a></article></div><p id="article-empty" hidden>沒有符合的文章，請試試其他關鍵字。</p></div></section>
-
-    <!-- Management Situations -->
+    <!-- Free Practical Management Analysis -->
     <section id="cases" class="section-pad scroll-mt-24 bg-warm-white" aria-labelledby="situations-title">
       <div class="editorial-container">
-        <div class="reveal grid gap-8 lg:grid-cols-12">
-          <div class="lg:col-span-4">
-            <p class="eyebrow">管理情境</p>
-            <p class="mt-4 inline-flex rounded-full border border-cool-gray bg-white px-3 py-1 text-xs font-semibold text-steel-blue">管理情境示例</p>
-          </div>
-          <div class="lg:col-span-8">
-            <h2 id="situations-title" class="display-title"><span class="sentence-part">管理情境拆解</span></h2>
-            <p class="mt-5 max-w-2xl body-copy text-charcoal/68">不是把問題快速歸類，而是辨認角色、責任與關係之間真正的拉扯。</p>
-          </div>
+        <div class="reveal grid gap-7 lg:grid-cols-12">
+          <div class="lg:col-span-4"><p class="eyebrow">實戰管理解析</p></div>
+          <div class="lg:col-span-8"><h2 id="situations-title" class="display-title">你正在面對的問題，可能已經有人走過。</h2></div>
         </div>
 
-        <div class="mt-14 grid gap-5 lg:grid-cols-3">
-          <article class="signature-card reveal rounded-2xl border border-cool-gray bg-white p-7 shadow-soft">
-            <div class="flex items-center justify-between gap-4">
-              <span class="font-inter text-xs font-semibold tracking-[0.15em] text-steel-blue">案例 01</span>
-              <span class="text-xs text-steel-blue">管理情境示例</span>
-            </div>
-            <h3 class="card-title mt-8 font-serif text-2xl text-carlos-navy"><span class="sentence-part">新主管開始帶以前的同事</span></h3>
-            <div class="mt-7 border-t border-cool-gray pt-5">
-              <p class="eyebrow">問題</p>
-              <p class="mt-2 text-sm leading-7 text-charcoal/72">角色界線突然改變。</p>
-            </div>
-            <div class="mt-6 border-t border-cool-gray pt-5">
-              <p class="eyebrow">核心觀察</p>
-              <p class="mt-2 text-sm leading-7 text-charcoal/72">主管需要處理的不是「我要不要擺出主管架子」，而是重新建立責任與決策邊界。</p>
-            </div>
-          </article>
-
-          <article class="signature-card reveal rounded-2xl border border-cool-gray bg-white p-7 shadow-soft" style="--delay:100ms;">
-            <div class="flex items-center justify-between gap-4">
-              <span class="font-inter text-xs font-semibold tracking-[0.15em] text-steel-blue">案例 02</span>
-              <span class="text-xs text-steel-blue">管理情境示例</span>
-            </div>
-            <h3 class="card-title mt-8 font-serif text-2xl text-carlos-navy"><span class="sentence-part">資深員工不願配合新主管</span></h3>
-            <div class="mt-7 border-t border-cool-gray pt-5"><p class="eyebrow">問題</p><p class="mt-2 text-sm leading-7 text-charcoal/72">經驗與權力產生張力。</p></div>
-            <div class="mt-6 border-t border-cool-gray pt-5"><p class="eyebrow">核心觀察</p><p class="mt-2 text-sm leading-7 text-charcoal/72">先理解對方在保護什麼，再處理合作問題。</p></div>
-          </article>
-
-          <article class="signature-card reveal rounded-2xl border border-cool-gray bg-white p-7 shadow-soft" style="--delay:200ms;">
-            <div class="flex items-center justify-between gap-4">
-              <span class="font-inter text-xs font-semibold tracking-[0.15em] text-steel-blue">案例 03</span>
-              <span class="text-xs text-steel-blue">管理情境示例</span>
-            </div>
-            <h3 class="card-title mt-8 font-serif text-2xl text-carlos-navy"><span class="sentence-part">工作全部卡在主管身上</span></h3>
-            <div class="mt-7 border-t border-cool-gray pt-5"><p class="eyebrow">問題</p><p class="mt-2 text-sm leading-7 text-charcoal/72">主管看似最忙，團隊卻沒有真正成長。</p></div>
-            <div class="mt-6 border-t border-cool-gray pt-5"><p class="eyebrow">核心觀察</p><p class="mt-2 text-sm leading-7 text-charcoal/72">真正的交辦不是把工作分出去，而是逐步轉移責任與判斷能力。</p></div>
-          </article>
+        <div id="insights" class="reveal mt-8 border-y border-cool-gray py-6">
+          <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+            <div><p class="eyebrow">精選實戰管理解析</p><h3 class="mt-3 font-serif text-2xl text-carlos-navy sm:text-3xl">最多新手主管遇到的共同問題</h3></div>
+          </div>
+          <div class="mt-5 grid gap-x-8 gap-y-3 md:grid-cols-2">
+            <a href="#all-articles" class="text-base leading-7 text-carlos-navy hover:text-steel-blue">第十五篇｜為什麼主管要先找出團隊裡的關鍵人物？</a>
+            <a href="#all-articles" class="text-base leading-7 text-carlos-navy hover:text-steel-blue">第五篇｜當主管後，我的價值到底是什麼？</a>
+            <a href="#all-articles" class="text-base leading-7 text-carlos-navy hover:text-steel-blue">第十一篇｜為什麼主管要定期和員工一對一談話？</a>
+            <a href="#all-articles" class="text-base leading-7 text-carlos-navy hover:text-steel-blue">第六篇｜當主管後，為什麼開始覺得孤單？</a>
+            <a href="#all-articles" class="text-base leading-7 text-carlos-navy hover:text-steel-blue">第二十篇｜前任主管的影子還在，你該怎麼站穩？</a>
+          </div>
         </div>
+        <div class="mt-8 max-w-4xl border-l-2 border-olive-green pl-5">
+          <p class="font-serif text-xl font-semibold text-carlos-navy">依照主管成長階段，找到現在最需要的內容</p>
+          <p class="mt-2 text-base leading-7 text-charcoal/68">以下文章分為角色轉換、帶領團隊與影響組織三個部分。你可以從眼前最需要處理的情境開始，也可以依序閱讀，逐步建立完整的管理判斷與行動能力。</p>
+        </div>
+        <div id="all-articles" class="mt-6 grid gap-4"><details class="article-part reveal">
+            <summary><span class="font-inter text-sm font-bold tracking-[0.14em] text-olive-green">第一部</span><span><strong class="block font-serif text-xl text-carlos-navy sm:text-2xl">從做事的人，到真正的主管</strong><span class="mt-1 block text-base leading-7 text-charcoal/65">先完成角色轉換，理解自己的責任、價值與位置。</span></span></summary>
+            <div class="article-part-grid"><article class="article-entry"><img src="mywork/第1篇.png" alt="第1篇封面" loading="lazy"><h3>第一篇｜升上主管後，為什麼你越努力越焦慮？</h3></article><article class="article-entry"><img src="mywork/第2篇.png" alt="第2篇封面" loading="lazy"><h3>第二篇｜沒準備好就當主管，是不是注定會失敗？</h3></article><article class="article-entry"><img src="mywork/第3篇.png" alt="第3篇封面" loading="lazy"><h3>第三篇｜升上主管後，事情該自己做，還是交出去？</h3></article><article class="article-entry"><img src="mywork/第4篇.png" alt="第4篇封面" loading="lazy"><h3>第四篇｜我以前很會做事，但現在好像什麼都不對？</h3></article><article class="article-entry"><img src="mywork/第5篇.png" alt="第5篇封面" loading="lazy"><h3>第五篇｜當主管後，我的價值到底是什麼？</h3></article><article class="article-entry"><img src="mywork/第6篇.png" alt="第6篇封面" loading="lazy"><h3>第六篇｜當主管後，為什麼開始覺得孤單？</h3></article><article class="article-entry"><img src="mywork/第7篇.png" alt="第7篇封面" loading="lazy"><h3>第七篇｜從明星員工到主管，為什麼越能幹的人越容易卡住？</h3></article><article class="article-entry"><img src="mywork/第18篇.png" alt="第18篇封面" loading="lazy"><h3>第十八篇｜為什麼主管要先理解自己？</h3></article><article class="article-entry"><img src="mywork/第19篇.png" alt="第19篇封面" loading="lazy"><h3>第十九篇｜你想成為什麼樣的主管？</h3></article><article class="article-entry"><img src="mywork/第20篇.png" alt="第20篇封面" loading="lazy"><h3>第二十篇｜前任主管的影子還在，你該怎麼站穩？</h3></article><article class="article-entry"><img src="mywork/第21篇.png" alt="第21篇封面" loading="lazy"><h3>第二十一篇｜新任主管如何快速站穩位置：建立第一個戰功！</h3></article><article class="article-entry"><img src="mywork/第30篇.png" alt="第30篇封面" loading="lazy"><h3>第三十篇｜有一天沒有了職位，還有多少人願意跟著你？</h3></article></div>
+          </details><details class="article-part reveal">
+            <summary><span class="font-inter text-sm font-bold tracking-[0.14em] text-olive-green">第二部</span><span><strong class="block font-serif text-xl text-carlos-navy sm:text-2xl">從自己做，到帶著團隊做</strong><span class="mt-1 block text-base leading-7 text-charcoal/65">從分工、授權、回饋到衝突，建立讓團隊能前進的管理方式。</span></span></summary>
+            <div class="article-part-grid"><article class="article-entry"><img src="mywork/第8篇.png" alt="第8篇封面" loading="lazy"><h3>第八篇｜明明是合理分工，為什麼團隊卻覺得你在針對他們？</h3></article><article class="article-entry"><img src="mywork/第9篇.png" alt="第9篇封面" loading="lazy"><h3>第九篇｜為什麼你忙到崩潰，團隊卻還是不會自己動？</h3></article><article class="article-entry"><img src="mywork/第11篇.png" alt="第11篇封面" loading="lazy"><h3>第十一篇｜為什麼主管要定期和員工一對一談話？</h3></article><article class="article-entry"><img src="mywork/第12篇.png" alt="第12篇封面" loading="lazy"><h3>第十二篇｜新任主管面對員工質疑與不信任，該怎麼辦？</h3></article><article class="article-entry"><img src="mywork/第15篇.png" alt="第15篇封面" loading="lazy"><h3>第十五篇｜為什麼主管要先找出團隊裡的關鍵人物？</h3></article><article class="article-entry"><img src="mywork/第17篇.jpg" alt="第17篇封面" loading="lazy"><h3>第十七篇｜真正厲害的主管，都會先做一件事：看懂工作現場</h3></article><article class="article-entry"><img src="mywork/第22篇.png" alt="第22篇封面" loading="lazy"><h3>第二十二篇｜為什麼新手主管要公開讚美，私下指正？</h3></article><article class="article-entry"><img src="mywork/第24篇.png" alt="第24篇封面" loading="lazy"><h3>第二十四篇｜為什麼你講了很多次，團隊裡還是有人做錯？</h3></article><article class="article-entry"><img src="mywork/第25篇.png" alt="第25篇封面" loading="lazy"><h3>第二十五篇｜為什麼主管不能太快下結論？</h3></article><article class="article-entry"><img src="mywork/第27篇.png" alt="第27篇封面" loading="lazy"><h3>第二十七篇｜為什麼你的團隊，開始不跟你說真話？</h3></article><article class="article-entry"><img src="mywork/第28篇.png" alt="第28篇封面" loading="lazy"><h3>第二十八篇｜為什麼主管不能逃避團隊衝突？</h3></article><article class="article-entry"><img src="mywork/第31篇.png" alt="第31篇封面" loading="lazy"><h3>第三十一篇｜主管容易犯的錯誤，就是把「魔鬼藏在細節裡」當成管理方式</h3></article><article class="article-entry"><img src="mywork/第33篇.png" alt="第33篇封面" loading="lazy"><h3>第三十三篇｜為什麼主管不能忽略員工犯的小錯？</h3></article><article class="article-entry"><img src="mywork/第34篇.png" alt="第34篇封面" loading="lazy"><h3>第三十四篇｜主管怎麼掌握團隊，又不讓員工只會等答案？</h3></article><article class="article-entry"><img src="mywork/第35篇.png" alt="第35篇封面" loading="lazy"><h3>第三十五篇｜新手主管不懂得拒絕，為什麼反而更難帶人？</h3></article><article class="article-entry"><img src="mywork/第36篇.png" alt="第36篇封面" loading="lazy"><h3>第三十六篇｜為什麼有些員工明明很努力，工作成果卻不成比例？</h3></article><article class="article-entry"><img src="mywork/第38篇.png" alt="第38篇封面" loading="lazy"><h3>第三十八篇｜事情變順了，為什麼管理反而可能出了問題？</h3></article></div>
+          </details><details class="article-part reveal">
+            <summary><span class="font-inter text-sm font-bold tracking-[0.14em] text-olive-green">第三部</span><span><strong class="block font-serif text-xl text-carlos-navy sm:text-2xl">從管理事情，到開始影響組織</strong><span class="mt-1 block text-base leading-7 text-charcoal/65">把判斷帶進跨部門合作、向上溝通與組織運作。</span></span></summary>
+            <div class="article-part-grid"><article class="article-entry"><img src="mywork/第10篇.png" alt="第10篇封面" loading="lazy"><h3>第十篇｜為什麼你的提案明明有道理，主管會議卻沒人買單？</h3></article><article class="article-entry"><img src="mywork/第13篇.png" alt="第13篇封面" loading="lazy"><h3>第十三篇｜只是要一份資料，為什麼跨部門溝通會這麼難？</h3></article><article class="article-entry"><img src="mywork/第14篇.png" alt="第14篇封面" loading="lazy"><h3>第十四篇｜為什麼你需要別部門幫忙時，才發現沒人想理你？</h3></article><article class="article-entry"><img src="mywork/第16篇.png" alt="第16篇封面" loading="lazy"><h3>第十六篇｜問題發生時，你該先處理，還是先報告？</h3></article><article class="article-entry"><img src="mywork/第23篇.png" alt="第23篇封面" loading="lazy"><h3>第二十三篇｜為什麼主管需要建立自己的管理里程碑？</h3></article><article class="article-entry"><img src="mywork/第26篇.png" alt="第26篇封面" loading="lazy"><h3>第二十六篇｜為什麼你和主管愈溝通，關係反而愈差？</h3></article><article class="article-entry"><img src="mywork/第29篇.png" alt="第29篇封面" loading="lazy"><h3>第二十九篇｜為什麼有些主管，換了領域依然能做出成果？</h3></article><article class="article-entry"><img src="mywork/第32篇.png" alt="第32篇封面" loading="lazy"><h3>第三十二篇｜為什麼朝令夕改，是主管最大的敵人？</h3></article><article class="article-entry"><img src="mywork/第37篇.png" alt="第37篇封面" loading="lazy"><h3>第三十七篇｜為什麼你做了很多，上司卻還是覺得你沒有掌握狀況？</h3></article><article class="article-entry"><img src="mywork/第39篇.png" alt="第39篇封面" loading="lazy"><h3>第三十九篇｜當你不同意上司的決定，該說還是不該說？</h3></article></div>
+          </details></div>
+        <p class="mt-8 text-sm leading-7 text-charcoal/60">註：文中案例經過去識別化與情境調整，人物、公司及部分細節皆為重新編排，重點在於呈現管理情境與實務思考。</p>
       </div>
     </section>
-
-    <!-- Article Method / Scroll Story -->
-    <section class="section-pad bg-white" aria-labelledby="story-title">
-      <div class="editorial-container grid gap-12 lg:grid-cols-12">
-        <div class="reveal lg:col-span-5">
-          <p class="eyebrow">文章分析方法</p>
-          <h2 id="story-title" class="display-title mt-4 max-w-xl"><span class="sentence-part">卡洛斯如何看一個管理問題？</span></h2>
-          <p class="mt-6 max-w-lg body-copy text-charcoal/68">先從情境出發，理解主管正在承受的拉扯，再把問題重新命名，最後才走向下一步行動。</p>
-        </div>
-
-        <div class="lg:col-span-7">
-          <ol class="space-y-7">
-            <li class="scroll-story-item reveal pb-7">
-              <span class="font-inter text-xs font-semibold tracking-[0.15em] text-steel-blue">01｜情境</span>
-              <h3 class="mt-2 font-serif text-2xl text-carlos-navy"><span class="sentence-part">發生了什麼？</span></h3>
-            </li>
-            <li class="scroll-story-item reveal pb-7" style="--delay:80ms;">
-              <span class="font-inter text-xs font-semibold tracking-[0.15em] text-steel-blue">02｜拉扯</span>
-              <h3 class="mt-2 font-serif text-2xl text-carlos-navy"><span class="sentence-part">新手主管在想什麼？</span></h3>
-            </li>
-            <li class="scroll-story-item reveal pb-7" style="--delay:160ms;">
-              <span class="font-inter text-xs font-semibold tracking-[0.15em] text-steel-blue">03｜觀察</span>
-              <h3 class="mt-2 font-serif text-2xl text-carlos-navy"><span class="sentence-part">真正的問題是什麼？</span></h3>
-            </li>
-            <li class="scroll-story-item reveal pb-7">
-              <span class="font-inter text-xs font-semibold tracking-[0.15em] text-steel-blue">04｜轉折</span>
-              <h3 class="mt-2 font-serif text-2xl text-carlos-navy"><span class="sentence-part">主管需要重新理解什麼？</span></h3>
-            </li>
-            <li class="scroll-story-item reveal pb-7" style="--delay:80ms;">
-              <span class="font-inter text-xs font-semibold tracking-[0.15em] text-steel-blue">05｜行動</span>
-              <h3 class="mt-2 font-serif text-2xl text-carlos-navy"><span class="sentence-part">下一步可以怎麼做？</span></h3>
-            </li>
-            <li class="scroll-story-item reveal" style="--delay:160ms;">
-              <span class="font-inter text-xs font-semibold tracking-[0.15em] text-steel-blue">06｜反思</span>
-              <h3 class="mt-2 font-serif text-2xl text-carlos-navy"><span class="sentence-part">如果是你，</span><span class="sentence-part">你會怎麼選？</span></h3>
-            </li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <!-- Subscribe -->
-    
 
     <!-- Core Product -->
     <section id="core-products" class="section-pad scroll-mt-24 bg-carlos-navy text-white" aria-labelledby="core-products-title">
       <div class="editorial-container">
-        <article class="reveal mx-auto max-w-5xl border border-white/20 bg-white/5 px-6 py-10 sm:px-10 lg:px-14 lg:py-14">
+        <article class="reveal mx-auto max-w-5xl border border-white/20 bg-white/5 px-6 py-8 sm:px-10 lg:px-12 lg:py-10">
           <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
             <div class="lg:col-span-2">
-              <img id="core-product-logo" class="h-20 w-20 rounded-full border border-olive-green/70 bg-white object-contain p-1" src="assets/logo.webp" alt="卡洛斯品牌 LOGO" />
+              <img id="core-product-logo" class="h-20 w-20 rounded-full border border-olive-green/70 bg-white object-contain p-1" src="mywork/LOGO-symbol.png" alt="卡洛斯品牌 LOGO" />
             </div>
             <div class="lg:col-span-7">
-              <p class="eyebrow text-white/60">實戰管理訂閱計畫</p>
-              <h2 id="core-products-title" class="mt-4 font-serif text-3xl leading-tight text-white sm:text-4xl">卡洛斯新手主管訂閱計畫<span class="subscription-tagline">陪你少走彎路，<br />穩穩成為會帶人的主管</span></h2>
-              <p class="mt-6 text-base leading-8 text-white/75">卡洛斯 新手主管訂閱計畫，每月兩篇深度文章、每月直播、直播回放與管理工具模板，陪你把那些沒人教、也不好問的新手主管問題，慢慢講清楚</p>
+              <p class="eyebrow text-white/60">核心產品與技術解決方案</p>
+              <h2 id="core-products-title" class="mt-4 font-serif text-2xl leading-snug text-white sm:text-3xl">
+                <span class="block">實戰管理訂閱計畫｜</span>
+                <span class="mt-1 block">陪你少走彎路，穩穩成為會帶人的主管</span>
+              </h2>
+              <div class="mt-6 text-base font-bold leading-8 text-olive-green">
+                <p class="text-white">
+                  <span class="block">每月兩篇深度文章解析、每月直播、</span>
+                  <span class="block">直播回放與管理工具模板</span>
+                </p>
+                <p class="mt-3">
+                  <span class="block">陪你把那些沒人教、也不好問的新手主管問題，</span>
+                  <span class="block">慢慢講清楚</span>
+                </p>
+              </div>
             </div>
             <div class="lg:col-span-3 lg:text-right">
               <a href="https://vocus.cc/pay/salon/season/?planId=6a50a63ffd89780001475daf&fromPage=salon" target="_blank" rel="noopener noreferrer" class="btn-primary inline-flex">瞭解訂閱計畫 <i class="fa-solid fa-arrow-up-right-from-square ml-2" aria-hidden="true"></i></a>
@@ -936,11 +939,11 @@
       <div class="editorial-container grid gap-12 lg:grid-cols-12 lg:gap-20">
         <div class="reveal lg:col-span-5">
           <p class="eyebrow">與我們取得聯繫</p>
-          <h2 id="consultation-title" class="mt-6 font-serif text-[clamp(2.3rem,5vw,5rem)] font-semibold leading-[1.18] tracking-[-0.04em] text-carlos-navy">
+          <h2 id="consultation-title" class="mt-6 font-serif text-[clamp(1.9rem,3.6vw,3.6rem)] font-semibold leading-[1.2] tracking-[-0.03em] text-carlos-navy">
             讓我們一起，<br />把管理現場看清楚。
           </h2>
           <p class="mt-8 max-w-xl body-copy text-charcoal/68">如果你正在面對主管角色轉換、團隊管理、人才培育或企業主管訓練需求，歡迎留下訊息，從一次對話開始。</p>
-          <div class="mt-10 border-t border-cool-gray pt-6">
+          <div class="mt-6 border-t border-cool-gray pt-5">
             <p class="text-sm font-semibold text-steel-blue">聯絡信箱</p>
             <a href="mailto:carlos.newmanager@gmail.com" class="mt-2 inline-block break-all font-inter text-lg font-semibold text-carlos-navy hover:text-steel-blue">carlos.newmanager@gmail.com</a>
           </div>
@@ -1007,32 +1010,30 @@
   <div id="contact-success-modal" class="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-success-title" hidden>
     <div class="contact-modal-panel">
       <p class="eyebrow">訊息已收到</p>
-      <h2 id="contact-success-title" class="mt-4 font-serif text-3xl font-semibold text-carlos-navy"><span class="sentence-part">需求已送出，</span><span class="sentence-part">我們將盡快與您聯絡！</span></h2>
+      <h2 id="contact-success-title" class="mt-4 font-serif text-3xl font-semibold text-carlos-navy">需求已送出，我們將盡快與您聯絡！</h2>
       <button id="contact-success-close" type="button" class="btn-primary mt-7">關閉提示</button>
     </div>
   </div>
 
   <!-- Footer -->
   <footer class="bg-carlos-navy text-white">
-    <div class="editorial-container py-14 sm:py-16">
+    <div class="editorial-container py-10 sm:py-12">
       <div class="grid gap-10 lg:grid-cols-12">
         <div class="lg:col-span-6">
-          <p class="font-serif text-3xl">卡洛斯實戰管理顧問</p>
-          <p class="mt-6 text-sm text-white/70">卡洛斯｜新手主管的實戰觀察</p>
-          <p class="mt-3 max-w-lg font-serif text-xl leading-8 text-white/88">冷靜地看懂管理現場，陪新手主管站穩第一步。</p>
+          <p class="font-serif text-3xl">卡洛斯｜新手主管的實戰管理顧問</p>
+          <p class="mt-5 max-w-lg font-serif text-xl font-bold leading-8 text-olive-green">冷靜地看懂管理現場，陪新手主管站穩第一步。</p>
         </div>
         <div class="lg:col-span-6 lg:flex lg:justify-end">
-          <nav class="grid grid-cols-2 gap-x-10 gap-y-2 sm:grid-cols-4 lg:max-w-xl" aria-label="頁尾導覽">
+          <nav class="grid grid-cols-1 gap-y-2 sm:grid-cols-3 sm:gap-x-10 lg:max-w-xl" aria-label="頁尾導覽">
             <a href="#about" class="min-h-[44px] py-3 text-sm text-white/70 transition-colors hover:text-white">關於我們</a>
             <a href="#services" class="min-h-[44px] py-3 text-sm text-white/70 transition-colors hover:text-white">服務項目</a>
-            <a href="#core-products" class="min-h-[44px] py-3 text-sm text-white/70 transition-colors hover:text-white">實戰管理訂閱計畫</a>
-            <a href="#consultation" class="min-h-[44px] py-3 text-sm text-white/70 transition-colors hover:text-white">管理諮詢</a>
+            <a href="#consultation" class="min-h-[44px] py-3 text-sm text-white/70 transition-colors hover:text-white">服務諮詢</a>
           </nav>
         </div>
       </div>
 
-      <div class="mt-12 border-t border-white/15 pt-6">
-        <p class="font-inter text-xs tracking-wide text-white/45">© 2026 卡洛斯實戰管理顧問。版權所有。</p>
+      <div class="mt-8 border-t border-white/15 pt-5">
+        <p class="font-inter text-sm tracking-wide text-white/45">© 2026 卡洛斯實戰管理顧問。版權所有。</p>
       </div>
     </div>
   </footer>
@@ -1109,31 +1110,8 @@
         const cursor = document.getElementById('typewriter-cursor');
         if (!hero || !textEl || !cursor) return;
 
-        const fullText = '把新手主管沒人教、也不好問的問題，慢慢講清楚。';
         hero.classList.add('hero-ready');
-
-        if (prefersReducedMotion) {
-          textEl.textContent = fullText;
-          return;
-        }
-
-        textEl.textContent = '';
-        cursor.classList.add('is-active');
-
-        let index = 0;
-        const typeNext = () => {
-          if (index >= fullText.length) {
-            cursor.classList.remove('is-active');
-            cursor.classList.add('is-done');
-            return;
-          }
-          textEl.textContent += fullText[index];
-          index += 1;
-          const delay = 62 + Math.floor(Math.random() * 15);
-          window.setTimeout(typeNext, delay);
-        };
-
-        window.setTimeout(typeNext, 820);
+        cursor.classList.remove('is-active');
       }
 
       function initScrollReveal() {
@@ -1294,27 +1272,6 @@
         });
       }
 
-      function initFrameworkReveal() {
-        const steps = document.querySelectorAll('[data-framework-step]');
-        if (!steps.length) return;
-
-        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-          steps.forEach(step => step.classList.add('is-visible'));
-          return;
-        }
-
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.45 });
-
-        steps.forEach(step => observer.observe(step));
-      }
-
       function initDemoArticleButtons() {
         const message = document.getElementById('article-demo-message');
         document.querySelectorAll('[data-demo-article]').forEach(button => {
@@ -1351,28 +1308,40 @@
         coreProductLogo.src = brandLogo.src;
       }
 
+      function initBrandVideo() {
+        const video = document.getElementById('brand-video');
+        if (!video) return;
+        video.muted = true;
+        video.loop = false;
+        const playOnce = () => { video.loop = false; video.currentTime = 0; video.play().catch(() => {}); };
+        const playWhileHovered = () => { video.loop = true; video.currentTime = 0; video.play().catch(() => {}); };
+        video.addEventListener('mouseenter', playWhileHovered);
+        video.addEventListener('mouseleave', () => { video.loop = false; });
+        video.addEventListener('focus', playWhileHovered);
+        video.addEventListener('blur', () => { video.loop = false; });
+        playOnce();
+      }
+
       document.addEventListener('DOMContentLoaded', () => {
         initMobileMenu();
         initSmoothScroll();
-        document.getElementById('home').classList.add('hero-ready');
+        initTypewriter();
         initScrollReveal();
         initActiveNavigation();
         initNewsletterForm();
         initContactForm();
         initBackToTop();
-        initFrameworkReveal();
         initDemoArticleButtons();
         initHeaderState();
         initCoreProductLogo();
+        initBrandVideo();
       });
     })();
   </script>
-<script>
-document.getElementById('article-search').addEventListener('input',function(){
- const q=this.value.trim();let count=0;
- document.querySelectorAll('.article-card').forEach(card=>{const match=!q||card.dataset.title.includes(q)||card.dataset.number===q;card.hidden=!match;if(match)count++;});
- document.getElementById('article-count').textContent=`共 ${count} 篇文章`;
- document.getElementById('article-empty').hidden=count!==0;
-});
-</script></body>
+</body>
 </html>
+
+
+
+
+
