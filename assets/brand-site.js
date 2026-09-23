@@ -13,19 +13,27 @@ const video=document.querySelector('#brand-film-video');
 if(film&&video){
  const hero=document.querySelector('.hero-grid'),framework=document.querySelector('#framework>.container');
  const compact=matchMedia('(max-width:980px)'),reduced=matchMedia('(prefers-reduced-motion:reduce)');
- const button=film.querySelector('.film-toggle'),fallback=film.querySelector('.motion-fallback');
- let userPaused=false,failed=false;
+ const fallback=film.querySelector('.motion-fallback');
+ let failed=false,initialPlays=0,initialComplete=false,hovering=false,inView=false;
+ const play=()=>{if(!document.hidden&&inView&&!reduced.matches&&!failed)video.play().catch(()=>{failed=true;update();});};
  const update=()=>{
   if(compact.matches&&film.parentElement!==framework)framework.prepend(film);else if(!compact.matches&&film.parentElement!==hero)hero.append(film);
-  video.hidden=reduced.matches||failed;fallback.style.display=video.hidden?'block':'none';button.hidden=video.hidden;
-  if(video.hidden||userPaused)video.pause();else if(!document.hidden)video.play().catch(()=>{fallback.style.display='block';video.hidden=true;button.hidden=true;});
+  video.hidden=reduced.matches||failed;fallback.style.display=video.hidden?'block':'none';
+  if(video.hidden||(!hovering&&initialComplete))video.pause();else play();
  };
- button.addEventListener('click',()=>{userPaused=!userPaused;button.textContent=userPaused?'播放動畫':'暫停動畫';button.setAttribute('aria-label',userPaused?'播放品牌影片':'暫停品牌影片');update();});
+ video.loop=false;
+ video.addEventListener('ended',()=>{
+  if(hovering){video.currentTime=0;play();return;}
+  initialPlays++;
+  if(initialPlays<2){video.currentTime=0;play();}else initialComplete=true;
+ });
+ film.addEventListener('mouseenter',()=>{if(reduced.matches||failed)return;hovering=true;video.currentTime=0;play();});
+ film.addEventListener('mouseleave',()=>{hovering=false;});
  video.addEventListener('error',()=>{failed=true;update();});
  video.querySelector('source')?.addEventListener('error',()=>{failed=true;update();});
  compact.addEventListener('change',update);reduced.addEventListener('change',update);
  document.addEventListener('visibilitychange',()=>{if(document.hidden)video.pause();else update();});
- const filmObserver=new IntersectionObserver(entries=>{if(entries[0].isIntersecting){update();}else video.pause();},{rootMargin:'100px'});
+ const filmObserver=new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;if(inView)update();else video.pause();},{rootMargin:'100px'});
  if(reduced.matches)video.removeAttribute('autoplay');
  if(compact.matches)framework.prepend(film);
  filmObserver.observe(film);if(reduced.matches)update();
@@ -63,7 +71,14 @@ if(form){
  });
 }
 const targetForHash=hash=>{try{return document.getElementById(decodeURIComponent(hash.slice(1)));}catch{return null;}};
+const focusedSections=new Set(['about','development','contact']);
+const applySectionView=target=>{
+ const id=focusedSections.has(target?.id)?target.id:'';
+ document.body.toggleAttribute('data-section-view',Boolean(id));
+ document.querySelectorAll('main>section').forEach(section=>section.classList.toggle('active-section',section.id===id));
+};
 const scrollToSection=(target,behavior='instant')=>{
+ applySectionView(target);
  const headerHeight=document.querySelector('.site-header')?.offsetHeight||0;
  const details=target.querySelector('details');if(details)details.open=true;
  window.scrollTo({top:Math.max(0,target.getBoundingClientRect().top+scrollY-headerHeight-16),behavior});
@@ -78,7 +93,7 @@ document.addEventListener('click',event=>{
  if(location.hash!==url.hash)history.pushState(null,'',url.hash);
  scrollToSection(target);
 });
-const alignCurrentHash=()=>{const target=targetForHash(location.hash);if(target)scrollToSection(target);};
+const alignCurrentHash=()=>{const target=targetForHash(location.hash);if(target)scrollToSection(target);else applySectionView(null);};
 window.addEventListener('hashchange',alignCurrentHash);window.addEventListener('popstate',alignCurrentHash);window.addEventListener('load',alignCurrentHash);
 document.fonts?.ready.then(alignCurrentHash);
 const filter=document.querySelector('#topic-filter');
