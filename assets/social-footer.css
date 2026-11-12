@@ -1,0 +1,35 @@
+/* Platform marks beside the existing social link labels. */
+.footer-social-links a,
+.article-site-footer .footer-social-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.footer-social-links a .social-platform-mark {
+  display: grid;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  place-items: center;
+  border-radius: 10px;
+  background: #fff;
+}
+.social-platform-mark img {
+  display: block;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+.social-platform-copy { min-width: 0; }
+@media (max-width: 640px) {
+  .footer-social-links a,
+  .article-site-footer .footer-social-links a { gap: 9px; }
+  .footer-social-links a .social-platform-mark {
+    flex-basis: 32px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+  .social-platform-mark img { width: 24px; height: 24px; }
+}
