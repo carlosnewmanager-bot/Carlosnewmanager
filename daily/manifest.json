@@ -1,0 +1,45 @@
+{
+  "posts": [
+    {
+      "slug": "shuizhen-park",
+      "title": "水圳公園｜留給鴨鴨的小空隙",
+      "url": "/daily/shuizhen-park.html",
+      "images": [
+        {
+          "src": "/assets/daily/shuizhen-park.jpg",
+          "alt": "竹北水圳公園的水池、水柱與周圍綠地"
+        },
+        {
+          "src": "/assets/daily/shuizhen-family.jpg",
+          "alt": "水圳公園戲水區，前景兩位孩子的臉部已用貼圖遮蔽"
+        }
+      ]
+    },
+    {
+      "slug": "tainan-heart-tree",
+      "title": "台南愛心樹｜路過的小小收穫",
+      "url": "/daily/tainan-heart-tree.html",
+      "images": [
+        {
+          "src": "/assets/daily/heart-tree.jpg",
+          "alt": "台南街角一棵樹冠呈愛心形狀的樹"
+        },
+        {
+          "src": "/assets/daily/heart-tree-street.jpg",
+          "alt": "道路旁的愛心樹，周圍可見街景與建築"
+        }
+      ]
+    },
+    {
+      "slug": "metro-holding-hands",
+      "title": "捷運上的牽手｜很平常，也很珍貴",
+      "url": "/daily/metro-holding-hands.html",
+      "images": [
+        {
+          "src": "/assets/daily/metro-hands-watercolor.png",
+          "alt": "水彩手繪：捷運車廂內，一對年長夫妻自然牽著手"
+        }
+      ]
+    }
+  ]
+}
