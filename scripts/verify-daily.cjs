@@ -5,6 +5,10 @@ const root=path.resolve(__dirname,'..');const {posts}=JSON.parse(fs.readFileSync
 const read=rel=>fs.readFileSync(path.join(root,rel),'utf8');
 for(const post of posts){
  const article=read(post.url.slice(1));
+ if(post.layout==='photo-text-photo'){
+  const first=article.indexOf('src="'+post.images[0].src+'"');const prose=article.indexOf('<div class="daily-prose">');const second=article.indexOf('src="'+post.images[1].src+'"');
+  if(!(first>=0&&first<prose&&prose<second))failures.push(post.slug+': expected first photo, complete text, second photo');
+ }
  const figures=article.match(/<figure class="daily-photo">[\s\S]*?<\/figure>/g)||[];
  if(!post.images?.length||figures.length!==post.images.length)failures.push(post.slug+': photo count differs from approved inventory');
  let previous=-1;

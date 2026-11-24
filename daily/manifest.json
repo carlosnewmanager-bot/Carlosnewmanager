@@ -13,7 +13,8 @@
           "src": "/assets/daily/shuizhen-family.jpg",
           "alt": "水圳公園戲水區，前景兩位孩子的臉部已用貼圖遮蔽"
         }
-      ]
+      ],
+      "layout": "photo-text-photo"
     },
     {
       "slug": "tainan-heart-tree",
@@ -28,7 +29,8 @@
           "src": "/assets/daily/heart-tree-street.jpg",
           "alt": "道路旁的愛心樹，周圍可見街景與建築"
         }
-      ]
+      ],
+      "layout": "photo-text-photo"
     },
     {
       "slug": "metro-holding-hands",
